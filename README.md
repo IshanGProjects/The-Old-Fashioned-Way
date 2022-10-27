@@ -1,11 +1,15 @@
 # The-Old-Fashioned-Way
-
+  
 # 1. Team Number
-
+  Team Number 7
 # 2. Team name
-
+  The 7
 # 3. Team Members
-
+  -Kartik Sharma
+  -Chengmin Li
+  -Nathan Mukooba
+  -Erik Hirschmann
+Ishan Gohil
 # 4. Application Name
 
 # 5. Application Description
