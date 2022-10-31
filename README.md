@@ -27,8 +27,9 @@ We plan on communicating via Slack in order to discuss meeting times and other p
 https://join.slack.com/t/colorado-o157733/shared_invite/zt-1ipkk7a9u-dcajc0aZ7yU7Um1_9M_dEw
 # 10. Meeting Plan
 Meet twice a week for 2 hours, depending on people's workload for the week, and it might change. But, we are aiming to have everyone participate together for a total of 4 hours a week.
-# 11. Use Case Diagram
 
+# 11. Use Case Diagram
+![Group 1 (1)](https://user-images.githubusercontent.com/86436938/199095223-9762b2c2-3665-4c0b-8b81-2192d1f0d342.png)
 # 12. Wireframes
 
 
