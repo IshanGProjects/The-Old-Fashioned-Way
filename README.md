@@ -23,9 +23,10 @@ We envision creating the most compelling gaming platform that is accessible and 
 # 8. Development Methodology
 GitHub repository link > https://github.com/IshanGProjects/The-Old-Fashioned-Way.git
 # 9. Communication Plan
-
+We plan on communicating via Slack in order to discuss meeting times and other project needs.
+https://join.slack.com/t/colorado-o157733/shared_invite/zt-1ipkk7a9u-dcajc0aZ7yU7Um1_9M_dEw
 # 10. Meeting Plan
-
+Meet twice a week for 2 hours, depending on people's workload for the week, and it might change. But, we are aiming to have everyone participate together for a total of 4 hours a week.
 # 11. Use Case Diagram
 
 # 12. Wireframes
