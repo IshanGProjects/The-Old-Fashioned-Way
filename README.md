@@ -32,10 +32,4 @@ Meet twice a week for 2 hours, depending on people's workload for the week, and 
 ![Group 1 (1)](https://user-images.githubusercontent.com/86436938/199095223-9762b2c2-3665-4c0b-8b81-2192d1f0d342.png)
 # 12. Wireframes
 
-
-
-
-
-
-
-
+![Wireframe (1)](https://user-images.githubusercontent.com/86436938/199586806-bd0757b8-4c96-4aab-9b06-83378b629f6f.png)
