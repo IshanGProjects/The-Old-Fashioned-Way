@@ -11,7 +11,6 @@ const app = express();
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
-
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -28,7 +27,6 @@ const dbConfig = {
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
 };
-
 const db = pgp(dbConfig);
 
 //CHECK FOR DATABASE CONNECTION
@@ -41,11 +39,12 @@ db.connect()
     console.log('ERROR:', error.message || error);
   });
 
-//THIS GET WILL BE CHANGED
+//**this get redirects the main page to the register page for the purposes of testing the register page
 app.get('/', (req, res) => {
   res.redirect('/register');
 });
 
+//REGISTER PAGE AND FORM USAGE
 app.get('/register', (req, res) => {
   res.render('pages/register');
 });
