@@ -11,8 +11,6 @@ const app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 
-
-
 //DATABASE CONFIGURATION FOR LOCAL ENVIROMENT
 const pgp = require('pg-promise')();
 require('dotenv').config();
@@ -27,10 +25,10 @@ const dbConfig = {
 const db = pgp(dbConfig);
 
 db.connect()
-.then(obj => {
-  console.log('Database connection successful'); // you can view this message in the docker compose logs
-  obj.done(); // success, release the connection;
-})
-.catch(error => {
-  console.log('ERROR:', error.message || error);
-});
+  .then(obj => {
+    console.log('Database connection successful'); // you can view this message in the docker compose logs
+    obj.done(); // success, release the connection;
+  })
+  .catch(error => {
+    console.log('ERROR:', error.message || error);
+  });
