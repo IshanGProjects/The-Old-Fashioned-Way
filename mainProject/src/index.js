@@ -41,7 +41,11 @@ db.connect()
     console.log('ERROR:', error.message || error);
   });
 
-//TEST REGISTRATION PAGE
+//THIS GET WILL BE CHANGED
+app.get('/', (req, res) => {
+  res.redirect('/register');
+});
+
 app.get('/register', (req, res) => {
   res.render('pages/register');
 });
