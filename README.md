@@ -29,7 +29,6 @@ https://join.slack.com/t/colorado-o157733/shared_invite/zt-1ipkk7a9u-dcajc0aZ7yU
 Meet twice a week for 2 hours, depending on people's workload for the week, and it might change. But, we are aiming to have everyone participate together for a total of 4 hours a week.
 
 # 11. Use Case Diagram
-![Group 1 (1)](https://user-images.githubusercontent.com/86436938/199095223-9762b2c2-3665-4c0b-8b81-2192d1f0d342.png)
-# 12. Wireframes
-
+![USE CASE DIAGRAM](https://user-images.githubusercontent.com/86436938/199650119-06ab4d05-0fc5-4570-a33b-81f42f1fcaa1.png)
+# 12. Wireframe
 ![Wireframe (1)](https://user-images.githubusercontent.com/86436938/199586806-bd0757b8-4c96-4aab-9b06-83378b629f6f.png)
