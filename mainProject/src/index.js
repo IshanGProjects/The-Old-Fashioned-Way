@@ -2,12 +2,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+path = require('path');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
 //DEFINING THE EXPRESS APP
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'public')));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
@@ -41,8 +43,9 @@ db.connect()
 
 //**this get redirects the main page to the register page for the purposes of testing the register page
 app.get('/', (req, res) => {
-  res.redirect('/register');
+  res.redirect('/home');
 });
+
 
 //REGISTER PAGE AND FORM USAGE
 app.get('/register', (req, res) => {
