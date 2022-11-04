@@ -49,6 +49,11 @@ app.get('/register', (req, res) => {
   res.render('pages/register');
 });
 
+app.get('/home', (req, res) => {
+  res.render('pages/home');
+});
+
+
 app.post('/register', async (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
@@ -81,10 +86,8 @@ app.post('/register', async (req, res) => {
 
     db.any(query)
       .then(function () {
-        res.render('pages/home', {
-          error: false,
-          message: `Successfully registered user "${req.body.username}"`,
-        })
+        res.redirect('/home');
+        
       })
       .catch(function (err) {
         res.render('pages/register',  {
