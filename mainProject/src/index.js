@@ -9,9 +9,10 @@ const axios = require('axios');
 //DEFINING THE EXPRESS APP
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('resources'));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
+// app.set('views', __dirname + '/views')
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
