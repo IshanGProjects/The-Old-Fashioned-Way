@@ -1,26 +1,81 @@
 html{
     margin: 0;
     padding: 0;
-}
-body {
+ }
+ body {
     width: 100vw;
     height: 100vh;
     background: transparent;
-    
-}
-
-main {
-    
+   
+ }
+  
+ main {
+   
     width: 100%;
     height: 100%;
     background: url(/img/LandingPageWithText.png);
     background-position: 50% 90%;
     background-size: cover;
+   
+ }
+  
+ @font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/pressstart2p/v14/e3t4euO8T-267oIAQAu6jDQyK3nYivNm4I81PZQ.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  }
+  
+  
+ .controller{
+
+    animation-duration: 3s;
+    animation-name: slidein;
+    width: 489px;
+    height: 216px;
+    position:absolute;
+    top:0;
+    right:0;
+    background: url(/img/controllerBackground.png);
+    background-repeat: no-repeat;
+
     
-}
-
-
-.scrollable {
+    
+ }
+  
+ p{
+    color: red;
+    font-family: "Press Start 2P";
+ }
+  
+ @keyframes slidein {
+ from {
+    margin-right: 0%;
+    width: 200%;
+ }
+  
+ to {
+    margin-right: -71.4%;
+    width: 100%;
+ }
+ }
+  
+ .loginButton{
+  
+    margin-left: auto;
+    margin-right: auto;
+ }
+  
+ html {
+    cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),auto;
+ }
+  
+ .scrollable {
     overflow: auto;
-}
+ }
 
+
+  
+ 
+ 
