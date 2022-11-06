@@ -42,6 +42,8 @@ db.connect()
     console.log('ERROR:', error.message || error);
   });
 
+
+
 //**this get redirects the main page to the register page for the purposes of testing the register page
 app.get('/', (req, res) => {
   res.redirect('/home');
@@ -141,6 +143,8 @@ app.post("/login", (req, res) => {
       }
 
       if(match == true){
+
+            
             res.redirect("/main");
 
 
