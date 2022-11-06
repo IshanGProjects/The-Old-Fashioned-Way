@@ -2,14 +2,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+path = require('path');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
 //DEFINING THE EXPRESS APP
 const app = express();
 
+app.use(express.static('resources'));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
+// app.set('views', __dirname + '/views')
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -41,8 +44,9 @@ db.connect()
 
 //**this get redirects the main page to the register page for the purposes of testing the register page
 app.get('/', (req, res) => {
-  res.redirect('/register');
+  res.redirect('/home');
 });
+
 
 //REGISTER PAGE AND FORM USAGE
 app.get('/register', (req, res) => {
@@ -51,6 +55,14 @@ app.get('/register', (req, res) => {
 
 app.get('/home', (req, res) => {
   res.render('pages/home');
+});
+
+app.get('/login', (req, res) => {
+  res.render('pages/login');
+});
+
+app.get('/main', (req, res) => {
+  res.render('pages/main');
 });
 
 app.get('/profile', (req, res) => {
@@ -90,7 +102,6 @@ app.post('/register', async (req, res) => {
     db.any(query)
       .then(function () {
         res.redirect('/home');
-        
       })
       .catch(function (err) {
         res.render('pages/register',  {
@@ -100,6 +111,61 @@ app.post('/register', async (req, res) => {
         console.log(err);
       });
   }
+});
+
+
+app.post("/login", (req, res) => {
+  
+  const query = `SELECT Users.Password FROM Users WHERE Users.Username = '${req.body.username}'`;
+  
+  if(req.body.username == ""){
+    res.render('pages/login', {
+      error: true,
+      message: "Please type in a username to login.",
+    });
+  }
+
+  else if(req.body.password == ""){
+    res.render('pages/login', {
+      error: true,
+      message: "Please type in a password to login.",
+    });
+  }
+
+  else{
+    db.one(query)
+    .then( async (data) => {
+      console.log(data.password);
+      const match = await bcrypt.compare(req.body.password, data.password);
+      
+
+      if(data == null){
+          res.redirect("/register");
+      }
+
+      if(match == true){
+            res.redirect("/main");
+
+
+      }
+      if(match == false){
+        res.render("pages/login", {
+          error: true,
+          message: "Incorrect Username or Password",
+        });
+          console.error("Incorrect username or password.");
+      }
+     
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("pages/login", {
+        error: true,
+        message: "Username is not in the System Please Register",
+      });
+    });
+  }
+  
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
