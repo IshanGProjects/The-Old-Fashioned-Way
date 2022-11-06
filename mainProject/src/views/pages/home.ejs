@@ -2,12 +2,30 @@
 <%- include ('../partials/message') %>
 
 
-<main class = "homeBack">
+
+<main class = "homeBack" id = "homeback">
+    
     <div class="controller">
-        
+            <p>    &nbsp       </p>
             
-             <button type="button" class="nes-btn is-error">Login</button>
-             <button type="button" class="nes-btn is-primary">Register</button>
+            <form action="/login" method = "GET">
+                <button type="submit" class="nes-btn is-error" id = "loginButton">Login</button>
+               </form>
+             <br>
+             
+
+             <form action="/register" method = "GET">
+             <button type="submit" class="nes-btn is-primary">Register</button>
+            </form>
+            <script>
+              var button = document.getElementById('loginButton');
+              button.addEventListener('click', function() {
+                console.log("test works")
+                var h1 = document.getElementById('homeback');
+                h1.style.opacity = 0.2;
+              });
+            </script>
+             
        
     </div>
   

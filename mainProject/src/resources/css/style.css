@@ -1,11 +1,13 @@
 html{
     margin: 0;
     padding: 0;
+    
  }
  body {
     width: 100vw;
     height: 100vh;
     background: transparent;
+    
    
  }
   
@@ -16,6 +18,11 @@ html{
     background: url(/img/LandingPageWithText.png);
     background-position: 50% 90%;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
    
  }
   
@@ -29,9 +36,7 @@ html{
   
   
  .controller{
-
-    animation-duration: 3s;
-    animation-name: slidein;
+    text-align: center;
     width: 489px;
     height: 216px;
     position:absolute;
@@ -49,22 +54,13 @@ html{
     font-family: "Press Start 2P";
  }
   
- @keyframes slidein {
- from {
-    margin-right: 0%;
-    width: 200%;
- }
-  
- to {
-    margin-right: -71.4%;
-    width: 100%;
- }
- }
+ 
   
  .loginButton{
   
     margin-left: auto;
     margin-right: auto;
+    
  }
   
  html {
