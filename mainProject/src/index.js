@@ -87,7 +87,6 @@ app.post('/register', async (req, res) => {
     db.any(query)
       .then(function () {
         res.redirect('/home');
-        
       })
       .catch(function (err) {
         res.render('pages/register',  {
