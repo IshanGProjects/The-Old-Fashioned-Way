@@ -53,6 +53,9 @@ app.get('/home', (req, res) => {
   res.render('pages/home');
 });
 
+app.get('/profile', (req, res) => {
+  res.render('pages/profile');
+});
 
 app.post('/register', async (req, res) => {
   const email = req.body.email;
