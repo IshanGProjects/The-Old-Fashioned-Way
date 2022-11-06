@@ -25,6 +25,24 @@ html{
     
    
  }
+
+ .loginContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:center;opacity:1;
+
+ }
+
+ .regContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:center;opacity:1;
+ }
+
+ 
+    
   
  @font-face {
     font-family: 'Press Start 2P';
