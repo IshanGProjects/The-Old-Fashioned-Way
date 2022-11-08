@@ -103,6 +103,32 @@ app.get('/main', auth,(req, res) => {
   });
 });
 
+app.get('/profile', (req, res) => {
+  res.render('pages/profile');
+});
+
+app.get('/edit_name', (req, res) => {
+  res.render('pages/edit_name');
+});
+
+app.post('/edit_name', async (req, res) => {
+  // const username = req.body.username;
+  // query = `SELECT Users.Username FROM Users WHERE Users.Username = '${req.body.username}'`
+  // console.log(req.body);
+
+  //   db.any(query)
+  //     .then(function () {
+  //       res.redirect('/profile');
+  //     })
+  //     .catch(function (err) {
+  //       res.render('pages/profile',  {
+  //         error: true,
+  //         message: "Username already exists in the system, please login or try another username",
+  //       });
+  //       console.log(err);
+  //     });
+  res.redirect('/profile');
+});
 
 app.post('/register', async (req, res) => {
   const email = req.body.email;
@@ -216,6 +242,8 @@ app.post("/login", (req, res) => {
   }
   
 });
+
+
 
 //SERVER LISTENING TO CLIENT REQUESTS
 app.listen(3000);
