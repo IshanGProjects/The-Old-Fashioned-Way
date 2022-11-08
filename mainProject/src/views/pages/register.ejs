@@ -2,43 +2,43 @@
 <%- include ('../partials/message') %>
 
 <main>
-    <div class="regContainer">
-        <div class="card border-0 mx-auto" style="width: 36rem; margin-top: 30px;">
-            <div class="card-body">
-                <form action="/home" method="GET">
-                <button type="submit" style="float: right;" class="nes-btn is-error">X</button>
-                </form>
-                <h2 style="margin-bottom: 30px;">Register</h2>
-            
-                <form action="/register" method="POST">
-                    
-                    <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
-                        <label for="dark_field" style="color:#fff;">Email:</label>
-                        <input type="email" id="dark_field" class="nes-input is-dark"  id="email" name="email">
-                      </div>
+    <div class="row h-100">
+        <div class="col my-auto">
+            <div class="card" style="margin: auto; padding: 15px; width: 36rem;">
+                <div class="nes-container with-title">
+                    <h3 class="title" style="font-size: 24px;">REGISTER</h3>
+                    <form action="/register" method="POST">
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <label style="color: #ffffff; font-size: 14px;">Email:</label>
+                            <input type="email" id="dark_field" class="nes-input is-dark"  id="email" name="email">
+                        </div>
 
-                      <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
-                        <label for="dark_field" style="color:#fff;">Username:</label>
-                        <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username">
-                      </div>
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <label style="color: #ffffff; font-size: 14px;">Username:</label>
+                            <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username">
+                        </div>
 
-                      <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
-                        <label for="dark_field" style="color:#fff;">Country:</label>
-                        <input type="text" id="dark_field" class="nes-input is-dark"  id = "country" name="country">
-                      </div>
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <label style="color: #ffffff; font-size: 14px;">Country:</label>
+                            <input type="text" id="dark_field" class="nes-input is-dark"  id = "country" name="country">
+                        </div>
 
-                      <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
-                        <label for="dark_field" style="color:#fff;">Password:</label>
-                        <input type="password" id="dark_field" class="nes-input is-dark"  id = "password" name="password">
-                      </div>
-                      <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
-                        <span for="dark_field" style="color:#fff;">Already Have an Account? <a href="/login">Login</a></span>
-                      </div>
-
-                    <p>    &nbsp       </p>
-                    <button type="submit" style="float: right;" class="nes-btn is-primary">Register</button>
-                </form>
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <label style="color: #ffffff; font-size: 14px;">Password:</label>
+                            <input type="password" id="dark_field" class="nes-input is-dark"  id = "password" name="password">
+                        </div>
+                        <div style="padding: 1rem;" class="nes-field">
+                            <span for="dark_field" style="font-size: 12px;">Already Have an Account? <a href="/login">Login</a></span>
+                        </div>
+                        <button type="submit" style="float: right; margin: 10px;" class="nes-btn is-error">register</button>
+                        <a href="/">
+                            <button type="button" style="float: right; margin: 10px;" class="nes-btn">close</button>
+                        </a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </main>
+
+<%- include ('../partials/footer') %>
