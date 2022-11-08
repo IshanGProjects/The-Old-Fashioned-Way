@@ -62,6 +62,7 @@ db.connect()
   });
 
 
+
    // Authentication Middleware.
    const auth = (req, res, next) => {
     if (!req.session.user) {
@@ -70,6 +71,7 @@ db.connect()
     }
     next();
   };
+
 
 //**this get redirects the main page to the register page for the purposes of testing the register page
 app.get('/', (req, res) => {
@@ -135,7 +137,6 @@ app.post('/register', async (req, res) => {
     db.any(query)
       .then(function () {
         res.redirect('/home');
-        
       })
       .catch(function (err) {
         res.render('pages/register',  {
@@ -189,6 +190,10 @@ app.post("/login", (req, res) => {
         req.session.save();
 
         res.redirect("/main");
+
+
+            
+            res.redirect("/main");
 
 
       }
