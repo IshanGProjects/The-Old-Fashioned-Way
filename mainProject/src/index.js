@@ -104,7 +104,14 @@ app.get('/main', auth,(req, res) => {
 });
 
 app.get('/profile', (req, res) => {
-  res.render('pages/profile');
+  res.render('pages/profile', {
+    Username: req.session.user.Username,
+    Email: req.session.user.Email,
+    Country: req.session.user.Country,
+    CurrencyBalance: req.session.user.CurrencyBalance,
+    TotalWins: req.session.user.TotalWins,
+    TotalLosses: req.session.user.TotalLosses,
+  });
 });
 
 app.get('/edit_name', (req, res) => {
@@ -215,13 +222,7 @@ app.post("/login", (req, res) => {
         req.session.user = user;
         req.session.save();
 
-        res.redirect("/main");
-
-
-            
-            res.redirect("/main");
-
-
+        res.redirect("/profile");
       }
       if(match == false){
         res.render("pages/login", {
