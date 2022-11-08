@@ -115,7 +115,14 @@ app.get('/profile', (req, res) => {
 });
 
 app.get('/edit_name', (req, res) => {
-  res.render('pages/edit_name');
+  res.render('pages/edit_name', {
+    Username: req.session.user.Username,
+    Email: req.session.user.Email,
+    Country: req.session.user.Country,
+    CurrencyBalance: req.session.user.CurrencyBalance,
+    TotalWins: req.session.user.TotalWins,
+    TotalLosses: req.session.user.TotalLosses,
+  });
 });
 
 app.post('/edit_name', async (req, res) => {
