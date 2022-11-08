@@ -9,6 +9,8 @@ const axios = require('axios');
 //DEFINING THE EXPRESS APP
 const app = express();
 
+
+
 app.use(express.static('resources'));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
@@ -19,6 +21,15 @@ app.use(
     extended: true,
   })
 );
+
+const user = {
+  Username: undefined,
+  Email: undefined,
+  Country: undefined,
+  CurrencyBalance: undefined,
+  TotalWins: undefined,
+  TotalLosses: undefined,
+};
 
 //DATABASE CONFIGURATION FOR LOCAL ENVIROMENT
 const pgp = require('pg-promise')();
@@ -32,6 +43,14 @@ const dbConfig = {
 };
 const db = pgp(dbConfig);
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: false,
+    resave: false,
+  })
+);
+
 //CHECK FOR DATABASE CONNECTION
 db.connect()
   .then(obj => {
@@ -42,6 +61,16 @@ db.connect()
     console.log('ERROR:', error.message || error);
   });
 
+
+
+   // Authentication Middleware.
+   const auth = (req, res, next) => {
+    if (!req.session.user) {
+      // Default to register page.
+      res.redirect('/home');
+    }
+    next();
+  };
 
 
 //**this get redirects the main page to the register page for the purposes of testing the register page
@@ -63,8 +92,15 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
-app.get('/main', (req, res) => {
-  res.render('pages/main');
+app.get('/main', auth,(req, res) => {
+  res.render('pages/main',{
+    Username: req.session.user.Username,
+    Email: req.session.user.Email,
+    Country: req.session.user.Country,
+    CurrencyBalance: req.session.user.CurrencyBalance,
+    TotalWins: req.session.user.TotalWins,
+    TotalLosses: req.session.user.TotalLosses,
+  });
 });
 
 
@@ -115,7 +151,7 @@ app.post('/register', async (req, res) => {
 
 app.post("/login", (req, res) => {
   
-  const query = `SELECT Users.Password FROM Users WHERE Users.Username = '${req.body.username}'`;
+  const query = `SELECT * FROM Users WHERE Users.Username = '${req.body.username}'`;
   
   if(req.body.username == ""){
     res.render('pages/login', {
@@ -134,7 +170,6 @@ app.post("/login", (req, res) => {
   else{
     db.one(query)
     .then( async (data) => {
-      console.log(data.password);
       const match = await bcrypt.compare(req.body.password, data.password);
       
 
@@ -143,6 +178,19 @@ app.post("/login", (req, res) => {
       }
 
       if(match == true){
+        console.log(data);
+        user.Username = data.username;
+        user.Email = data.email;
+        user.Country = data.country;
+        user.CurrencyBalance = data.currencybalance;
+        user.TotalWins = data.totalwins;
+        user.TotalLosses = data.totallosses;
+        
+        req.session.user = user;
+        req.session.save();
+
+        res.redirect("/main");
+
 
             
             res.redirect("/main");
