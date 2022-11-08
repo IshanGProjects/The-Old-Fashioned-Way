@@ -1,0 +1,41 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/message') %>
+
+<main>
+    <div class="container">
+            <center><div class = "card " style="text-align: center;">
+                <button class="btn btn-secondary" > <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
+                    alt="Snorlax" height="200" width="200" /></button>
+                <table style="font-size: 28px;">
+                    <tr>
+                        <th>Username: </th>
+                        <td>
+                            <form action="/edit_name" method="post">
+                                <div style="background-color:#ffffff; padding: 1rem;" class="nes-field is-inline">
+                                    <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username">
+                                    <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
+                                </div>
+                                
+                                </form>             
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Match History:</th>   <td>19 wins 0 lose</td>    
+                    </tr>
+
+                    <tr>
+                        <th>Coins:</th>   <td>999</td>
+                    </tr>
+
+                    <tr>
+                        <th>Friends:</th>   <td>999</td>
+                    </tr>
+                </table>
+
+            </div>
+        </center>
+
+    </div>
+  </main>
+<%- include ('../partials/footer') %>
