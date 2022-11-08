@@ -14,6 +14,7 @@ html{
  main {
     width: 100%;
     height: 100%;
+    image-rendering: pixelated;
     background: url(/img/LandingPageWithText.png);
     background-position: 50% 90%;
     background-size: cover;
@@ -56,11 +57,14 @@ html{
   
  .controller{
     text-align: center;
-    width: 489px;
+    margin-right: 15px;
+    margin-top: 15px;
+    width: 498px;
     height: 216px;
     position:absolute;
     top:0;
     right:0;
+    image-rendering: pixelated;
     background: url(/img/controllerBackground.png);
     background-repeat: no-repeat;
 
