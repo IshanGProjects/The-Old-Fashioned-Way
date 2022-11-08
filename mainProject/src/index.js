@@ -125,23 +125,36 @@ app.get('/edit_name', (req, res) => {
   });
 });
 
-app.post('/edit_name', async (req, res) => {
-  // const username = req.body.username;
-  // query = `SELECT Users.Username FROM Users WHERE Users.Username = '${req.body.username}'`
-  // console.log(req.body);
+app.post('/edit_name', (req, res) => {
+  const newUsername = req.body.username;
+  query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user.Username}'`
 
-  //   db.any(query)
-  //     .then(function () {
-  //       res.redirect('/profile');
-  //     })
-  //     .catch(function (err) {
-  //       res.render('pages/profile',  {
-  //         error: true,
-  //         message: "Username already exists in the system, please login or try another username",
-  //       });
-  //       console.log(err);
-  //     });
-  res.redirect('/profile');
+    db.any(query)
+      .then(function () {
+        req.session.user.Username = newUsername;
+
+        res.render('pages/profile', {
+          Username: req.session.user.Username,
+          Email: req.session.user.Email,
+          Country: req.session.user.Country,
+          CurrencyBalance: req.session.user.CurrencyBalance,
+          TotalWins: req.session.user.TotalWins,
+          TotalLosses: req.session.user.TotalLosses,
+        });
+      })
+      .catch(function (err) {
+        res.render('pages/profile',  {
+          error: true,
+          message: "Username already exists in the system, please login or try another username",
+          Username: req.session.user.Username,
+          Email: req.session.user.Email,
+          Country: req.session.user.Country,
+          CurrencyBalance: req.session.user.CurrencyBalance,
+          TotalWins: req.session.user.TotalWins,
+          TotalLosses: req.session.user.TotalLosses,
+        });
+        console.log(err);
+      });
 });
 
 app.post('/register', async (req, res) => {
