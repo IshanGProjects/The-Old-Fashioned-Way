@@ -92,7 +92,7 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
-app.get('/main', auth,(req, res) => {
+app.get('/main', auth, (req, res) => {
   res.render('pages/main',{
     Username: req.session.user.Username,
     Email: req.session.user.Email,
@@ -103,7 +103,7 @@ app.get('/main', auth,(req, res) => {
   });
 });
 
-app.get('/profile', (req, res) => {
+app.get('/profile', auth, (req, res) => {
   res.render('pages/profile', {
     Username: req.session.user.Username,
     Email: req.session.user.Email,
@@ -114,7 +114,7 @@ app.get('/profile', (req, res) => {
   });
 });
 
-app.get('/edit_name', (req, res) => {
+app.get('/edit_name', auth, (req, res) => {
   res.render('pages/edit_name', {
     Username: req.session.user.Username,
     Email: req.session.user.Email,

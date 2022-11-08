@@ -1,36 +1,40 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/message') %>
 
-<div class="container">
-        <center><div class = "card" style="text-align: center; margin-top: 30px;">
-            <button class="btn btn-secondary" > <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
+<div class="nes-container with-title" style="max-width: 960px; margin:auto; margin-top: 45px;">
+    <h3 class="title">EDIT PROFILE</h3>
+    <div class="nes-container" style="margin-top: 30px; margin-bottom: 30px;">
+        <center>
+            <button class="btn btn-secondary"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
                 alt="Snorlax" height="200" width="200" /></button>
-            <table>
-                <tr>
-                    <th style="font-size: 24px;">Username: </th>
-                    <td>
-                        <form action="/edit_name" method="post">
-                            <div style="background-color:#ffffff; padding: 1rem;" class="nes-field is-inline">
-                                <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username">
-                                <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
-                            </div>
-                        </form>             
-                    </td>
-                </tr>
-                <tr>
-                    <th style="font-size: 24px;">Country:</th> <td style="font-size: 24px;"><%= Country %></td>
-                </tr>
-                <tr>
-                    <th style="font-size: 24px;">Match History:</th> <td style="font-size: 24px;"><%= TotalWins %> wins <%= TotalLosses %> lose</td>    
-                </tr>
-                <tr>
-                    <th style="font-size: 24px;">Coins:</th> <td style="font-size: 24px;"><%= CurrencyBalance %></td>
-                </tr>
-            </table>
-        </div>
-    </center>
+        </center>
+        <table style="width:100%;">
+            <tr>
+                <td style="font-size: 22px; width:30%;">Username: </td>
+                <td>
+                    <form action="/edit_name" method="post">
+                        <div class="nes-field is-inline">
+                            <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username">
+                        </div>
+                        <td>
+                            <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
+                        </td>
+                    </form>             
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 22px;">Country:</td> <th style="font-size: 22px;"><%= Country %></th>
+            </tr>
+            <tr>
+                <td style="font-size: 22px;">Record:</td> <th style="font-size: 22px;"><%= TotalWins %> wins <%= TotalLosses %> lose</th>    
+            </tr>
+            <tr>
+                <td style="font-size: 22px;">Coins:</td> <th style="font-size: 22px;"><%= CurrencyBalance %></th>
+            </tr>
+        </table>
+    </div>
     <div class="row">
-        <a href="/profile">
+        <a href="/main">
             <button type="button" style="float:left;" class="nes-btn is-error">BACK</button>
         </a>
     </div>
