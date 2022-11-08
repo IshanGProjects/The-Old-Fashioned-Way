@@ -19,23 +19,18 @@
                                 </form>             
                         </td>
                     </tr>
-
                     <tr>
-                        <th>Match History:</th>   <td>19 wins 0 lose</td>    
+                        <th>Country:</th> <td><%= Country %></td>
                     </tr>
-
                     <tr>
-                        <th>Coins:</th>   <td>999</td>
+                        <th>Match History:</th> <td><%= TotalWins %> wins <%= TotalLosses %> lose</td>    
                     </tr>
-
                     <tr>
-                        <th>Friends:</th>   <td>999</td>
+                        <th>Coins:</th> <td><%= CurrencyBalance %></td>
                     </tr>
                 </table>
-
             </div>
         </center>
-
     </div>
   </main>
 <%- include ('../partials/footer') %>
