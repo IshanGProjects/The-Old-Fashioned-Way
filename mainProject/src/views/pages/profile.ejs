@@ -3,30 +3,34 @@
 
 
 <div class="container">
-        <center><div class = "card" style="text-align: center; margin-top: 30px;">
-            <button class="btn btn-secondary" > <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
+        <center><div class = "card" style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+            <button class="btn btn-secondary"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
                 alt="Snorlax" height="200" width="200" /></button>
-            <table style="font-size: 28px;">
+            <table>
                 <tr>
-                    <th>Username: </th> <td><%= Username %></td>
+                    <th style="font-size: 24px;">Username: </th> <td style="font-size: 24px;"><%= Username %></td>
                     <td>
                         <form action="/edit_name" method="GET">
                             <button type="submit" style="float: right;" class="nes-btn is-warning">EDIT</button>
-                        </form>             
+                        </form>
                     </td>
                 </tr>
                 <tr>
-                    <th>Country:</th> <td><%= Country %></td>
+                    <th style="font-size: 24px;">Country:</th> <td style="font-size: 24px;"><%= Country %></td>
                 </tr>
                 <tr>
-                    <th>Match History:</th> <td><%= TotalWins %> wins <%= TotalLosses %> losses</td>    
+                    <th style="font-size: 24px;">Match History:</th> <td style="font-size: 24px;"><%= TotalWins %> wins <%= TotalLosses %> losses</td>    
                 </tr>
                 <tr>
-                    <th>Coins:</th> <td><%= CurrencyBalance %></td>
+                    <th style="font-size: 24px;">Coins:</th> <td style="font-size: 24px;"><%= CurrencyBalance %></td>
                 </tr>
             </table>
         </div>
     </center>
-
+    <div class="row">
+        <a href="/main">
+            <button type="button" style="float:left;" class="nes-btn is-error">BACK</button>
+        </a>
+    </div>
 </div>
 <%- include ('../partials/footer') %>
