@@ -145,7 +145,7 @@ app.post('/edit_name', auth, (req, res) => {
       .catch(function (err) {
         res.render('pages/profile',  {
           error: true,
-          message: "Username already exists in the system, please try another username",
+          message: "Username already exists in the system, please try another username or login to your account",
           Username: req.session.user.Username,
           Email: req.session.user.Email,
           Country: req.session.user.Country,
