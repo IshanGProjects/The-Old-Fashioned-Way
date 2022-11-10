@@ -125,6 +125,10 @@ app.get('/edit_name', auth, (req, res) => {
   });
 });
 
+//Get Request for Game
+app.get('/game', (req,res) =>{
+  res.render('gameData/jsPong/index');
+});
 app.post('/edit_name', auth, (req, res) => {
   const newUsername = req.body.username;
   query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user.Username}'`
