@@ -31,6 +31,15 @@ const user = {
   TotalLosses: undefined,
 };
 
+const user2 = {
+  Username: undefined,
+  Email: undefined,
+  Country: undefined,
+  CurrencyBalance: undefined,
+  TotalWins: undefined,
+  TotalLosses: undefined,
+}
+
 //DATABASE CONFIGURATION FOR LOCAL ENVIROMENT
 const pgp = require('pg-promise')();
 require('dotenv').config();
@@ -78,29 +87,54 @@ app.get('/', (req, res) => {
   res.redirect('/home');
 });
 
-
 //REGISTER PAGE AND FORM USAGE
 app.get('/register', (req, res) => {
   res.render('pages/register');
-});
-
-app.get('/home', (req, res) => {
-  res.render('pages/home');
 });
 
 app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
+app.get('/home', (req, res) => {
+  res.render('pages/home');
+});
+
+app.get('/loginUser2', (req, res) => {
+  res.render('pages/loginUser2');
+})
+
+app.get('/registerUser2', (req, res) => {
+  res.render('pages/registerUser2');
+})
+
 app.get('/main', auth, (req, res) => {
-  res.render('pages/main',{
-    Username: req.session.user.Username,
-    Email: req.session.user.Email,
-    Country: req.session.user.Country,
-    CurrencyBalance: req.session.user.CurrencyBalance,
-    TotalWins: req.session.user.TotalWins,
-    TotalLosses: req.session.user.TotalLosses,
-  });
+  if(user2.Username == undefined) {
+    res.render('pages/main',{
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+    });
+  } else {
+    res.render('pages/main',{
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+    });
+  }
 });
 
 app.get('/profile', auth, (req, res) => {
@@ -189,7 +223,11 @@ app.post('/register', async (req, res) => {
 
     db.any(query)
       .then(function () {
-        res.redirect('/home');
+        if(user.Username == undefined) {
+          res.redirect('/home');
+        } else {
+          res.redirect('/main');
+        }
       })
       .catch(function (err) {
         res.render('pages/register',  {
@@ -200,7 +238,6 @@ app.post('/register', async (req, res) => {
       });
   }
 });
-
 
 app.post("/login", (req, res) => {
   
@@ -242,7 +279,7 @@ app.post("/login", (req, res) => {
         req.session.user = user;
         req.session.save();
 
-        res.redirect("/profile");
+        res.redirect("/main");
       }
       if(match == false){
         res.render("pages/login", {
@@ -261,10 +298,67 @@ app.post("/login", (req, res) => {
       });
     });
   }
-  
 });
 
+app.post("/loginUser2", (req, res) => {
+  
+  const query = `SELECT * FROM Users WHERE Users.Username = '${req.body.username}'`;
+  
+  if(req.body.username == ""){
+    res.render('pages/loginUser2', {
+      error: true,
+      message: "Please type in a username to login.",
+    });
+  }
 
+  else if(req.body.password == ""){
+    res.render('pages/loginUser2', {
+      error: true,
+      message: "Please type in a password to login.",
+    });
+  }
+
+  else{
+    db.one(query)
+    .then(async (data2) => {
+      const match = await bcrypt.compare(req.body.password, data2.password);
+
+      if(data2 == null){
+          res.redirect("/register");
+      }
+
+      if(match == true){
+        console.log(data2);
+        user2.Username = data2.username;
+        user2.Email = data2.email;
+        user2.Country = data2.country;
+        user2.CurrencyBalance = data2.currencybalance;
+        user2.TotalWins = data2.totalwins;
+        user2.TotalLosses = data2.totallosses;
+        
+        req.session.user2 = user2;
+        req.session.save();
+
+        res.redirect("/main");
+      }
+      if(match == false){
+        res.render("pages/loginUser2", {
+          error: true,
+          message: "Incorrect Username or Password",
+        });
+          console.error("Incorrect username or password.");
+      }
+     
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("pages/loginUser2", {
+        error: true,
+        message: "Username is not in the System Please Register",
+      });
+    });
+  }
+});
 
 //SERVER LISTENING TO CLIENT REQUESTS
 app.listen(3000);
