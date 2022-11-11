@@ -2,10 +2,6 @@
 <%- include ('../partials/message') %>
 
 
-<<<<<<< HEAD
-
-<main>
-=======
     <h3>User 1 => <%= Username %></h3>
     <h3>User 2 => 
         <% if(!locals.Username2) { %>
@@ -14,7 +10,6 @@
             <%= Username2 %></h3>
         <% } %>
     </h3>
->>>>>>> 643f42157badbde9f76158044bd6e0d2efc67fd5
     <div>
         <form action="/game" method="GET">
             <button type="submit" style="position:absolute; top:100px ; right:100px; padding: 32px 32px;" class="nes-btn is-success">Start</button>
@@ -26,11 +21,7 @@
             <button type="submit" style="position:absolute; top:400px ; right:100px; padding: 32px 32px;" class="nes-btn is-primary"><%= Username %>'s profile</button>
         </form>
         <br>
-<<<<<<< HEAD
-        <form action="/login" method="GET">
-=======
         <form action="/loginUser2" method="GET">
->>>>>>> 643f42157badbde9f76158044bd6e0d2efc67fd5
             <button type="submit" style="position:absolute; bottom:200px ; right:100px; padding: 32px 32px;" class="nes-btn is-warning">User2 Login ?</button>
         </form>
     </div>
@@ -69,21 +60,7 @@
                 <td style="font-size: 25px;color: #ffe100;">5.</td> <th style="font-size: 25px;color: #ffe100;">Fill in sth</th>
             </tr>
         </table>
-<<<<<<< HEAD
-    </div>
-
-        
-
-        
-         
-</div>
-
-
-</main>
-
-=======
     </div>   
 </div>
 
->>>>>>> 643f42157badbde9f76158044bd6e0d2efc67fd5
 <%- include ('../partials/footer') %>

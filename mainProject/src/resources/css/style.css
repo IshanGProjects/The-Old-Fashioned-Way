@@ -15,11 +15,7 @@ html{
     width: 100%;
     height: 100%;
     image-rendering: pixelated;
-<<<<<<< HEAD
     background: url(/images/LandingPageWithText.png);
-=======
-    background: url(/img/LandingPageWithText.png);
->>>>>>> 643f42157badbde9f76158044bd6e0d2efc67fd5
     background-position: 50% 90%;
     background-size: cover;
     display: flex;
@@ -69,11 +65,7 @@ html{
     top:0;
     right:0;
     image-rendering: pixelated;
-<<<<<<< HEAD
     background: url(/images/controllerBackground.png);
-=======
-    background: url(/img/controllerBackground.png);
->>>>>>> 643f42157badbde9f76158044bd6e0d2efc67fd5
     background-repeat: no-repeat;
 
     
