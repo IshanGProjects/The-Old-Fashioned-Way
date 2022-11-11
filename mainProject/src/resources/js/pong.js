@@ -103,11 +103,13 @@ Pong = {
     return 8 + (this.scores[playerNo] - this.scores[playerNo ? 0 : 1]);
   },
 
+  //This is the location where I will write my game winning logic
   goal: function(playerNo) {
     this.sounds.goal();
     this.scores[playerNo] += 1;
     if (this.scores[playerNo] == 9) {
       this.menu.declareWinner(playerNo);
+      console.log("WIN WIN")
       this.stop();
     }
     else {
