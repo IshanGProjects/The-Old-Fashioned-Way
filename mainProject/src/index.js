@@ -78,7 +78,6 @@ app.get('/', (req, res) => {
   res.redirect('/home');
 });
 
-
 //REGISTER PAGE AND FORM USAGE
 app.get('/register', (req, res) => {
   res.render('pages/register');
@@ -127,8 +126,7 @@ app.get('/edit_name', auth, (req, res) => {
 
 //Get Request for Game
 app.get('/game', (req,res) =>{
-  // res.render('gameData/jsPong/index');
-  res.render("gameData/jsPong/index")
+  res.render('gameData/jsPong/index');
 });
 app.post('/edit_name', auth, (req, res) => {
   const newUsername = req.body.username;
@@ -205,7 +203,6 @@ app.post('/register', async (req, res) => {
       });
   }
 });
-
 
 app.post("/login", (req, res) => {
   
