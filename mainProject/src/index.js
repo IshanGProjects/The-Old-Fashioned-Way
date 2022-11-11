@@ -96,6 +96,12 @@ app.get('/login', (req, res) => {
   res.render('pages/login');
 });
 
+app.get('/logout', (req, res) => {
+  req.session.user = false;
+  req.session.user2 = false;
+  res.redirect('/home');
+});
+
 app.get('/home', (req, res) => {
   res.render('pages/home');
 });
@@ -139,6 +145,7 @@ app.get('/main', auth, (req, res) => {
 
 app.get('/profile', auth, (req, res) => {
   res.render('pages/profile', {
+    Player1: req.session.user.Username,
     Username: req.session.user.Username,
     Email: req.session.user.Email,
     Country: req.session.user.Country,
@@ -148,14 +155,39 @@ app.get('/profile', auth, (req, res) => {
   });
 });
 
+app.get('/profileUser2', auth, (req, res) => {
+  res.render('pages/profile', {
+    Player1: req.session.user.Username,
+    Username: req.session.user2.Username,
+    Email: req.session.user2.Email,
+    Country: req.session.user2.Country,
+    CurrencyBalance: req.session.user2.CurrencyBalance,
+    TotalWins: req.session.user2.TotalWins,
+    TotalLosses: req.session.user2.TotalLosses,
+  });
+});
+
 app.get('/edit_name', auth, (req, res) => {
   res.render('pages/edit_name', {
+    Player1: req.session.user.Username,
     Username: req.session.user.Username,
     Email: req.session.user.Email,
     Country: req.session.user.Country,
     CurrencyBalance: req.session.user.CurrencyBalance,
     TotalWins: req.session.user.TotalWins,
     TotalLosses: req.session.user.TotalLosses,
+  });
+});
+
+app.get('/edit_name2', auth, (req, res) => {
+  res.render('pages/edit_name', {
+    Player1: req.session.user.Username,
+    Username: req.session.user2.Username,
+    Email: req.session.user2.Email,
+    Country: req.session.user2.Country,
+    CurrencyBalance: req.session.user2.CurrencyBalance,
+    TotalWins: req.session.user2.TotalWins,
+    TotalLosses: req.session.user2.TotalLosses,
   });
 });
 
@@ -168,6 +200,7 @@ app.post('/edit_name', auth, (req, res) => {
         req.session.user.Username = newUsername;
 
         res.render('pages/profile', {
+          Player1: req.session.user.Username,
           Username: req.session.user.Username,
           Email: req.session.user.Email,
           Country: req.session.user.Country,
@@ -180,12 +213,47 @@ app.post('/edit_name', auth, (req, res) => {
         res.render('pages/profile',  {
           error: true,
           message: "Username already exists in the system, please try another username or login to your account",
+          Player1: req.session.user.Username,
           Username: req.session.user.Username,
           Email: req.session.user.Email,
           Country: req.session.user.Country,
           CurrencyBalance: req.session.user.CurrencyBalance,
           TotalWins: req.session.user.TotalWins,
           TotalLosses: req.session.user.TotalLosses,
+        });
+        console.log(err);
+      });
+});
+
+app.post('/edit_name2', auth, (req, res) => {
+  const newUsername = req.body.username;
+  query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user2.Username}'`
+
+    db.any(query)
+      .then(function () {
+        req.session.user2.Username = newUsername;
+
+        res.render('pages/profile', {
+          Player1: req.session.user.Username,
+          Username: req.session.user2.Username,
+          Email: req.session.user2.Email,
+          Country: req.session.user2.Country,
+          CurrencyBalance: req.session.user2.CurrencyBalance,
+          TotalWins: req.session.user2.TotalWins,
+          TotalLosses: req.session.user2.TotalLosses,
+        });
+      })
+      .catch(function (err) {
+        res.render('pages/profile',  {
+          error: true,
+          message: "Username already exists in the system, please try another username or login to your account",
+          Player1: req.session.user.Username,
+          Username: req.session.user2.Username,
+          Email: req.session.user2.Email,
+          Country: req.session.user2.Country,
+          CurrencyBalance: req.session.user2.CurrencyBalance,
+          TotalWins: req.session.user2.TotalWins,
+          TotalLosses: req.session.user2.TotalLosses,
         });
         console.log(err);
       });
@@ -301,13 +369,19 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/loginUser2", (req, res) => {
-  
   const query = `SELECT * FROM Users WHERE Users.Username = '${req.body.username}'`;
   
   if(req.body.username == ""){
     res.render('pages/loginUser2', {
       error: true,
       message: "Please type in a username to login.",
+    });
+  }
+
+  if(req.body.username == req.session.user.Username){
+    res.render('pages/loginUser2', {
+      error: true,
+      message: "This user is already logged in. Please login as a unique second player",
     });
   }
 
