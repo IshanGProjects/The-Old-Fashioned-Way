@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-path = require('path');
+const path = require('path');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
@@ -11,7 +11,7 @@ const app = express();
 
 
 
-app.use(express.static('resources'));
+app.use(express.static(path.join(__dirname, 'resources')));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
 // app.set('views', __dirname + '/views')
@@ -189,6 +189,11 @@ app.get('/edit_name2', auth, (req, res) => {
     TotalWins: req.session.user2.TotalWins,
     TotalLosses: req.session.user2.TotalLosses,
   });
+});
+
+//Get Request for Game
+app.get('/game', (req,res) =>{
+  res.render('gameData/jsPong/index');
 });
 
 app.post('/edit_name', auth, (req, res) => {
