@@ -21,7 +21,7 @@ html{
    width: 100%;
    height: 100%;
    image-rendering: pixelated;
-   background: url(/img/LandingPageWithText.png) no-repeat center center fixed;
+   background: url(/images/LandingPageWithText.png) no-repeat center center fixed;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -72,9 +72,6 @@ html{
     image-rendering: pixelated;
     background: url(/images/controllerBackground.png);
     background-repeat: no-repeat;
-
-    
-    
  }
 
  .titleScreen{
@@ -84,7 +81,7 @@ html{
    height: 469px;
    image-rendering: pixelated;
    size: fluid;
-   background: url(/img/titleScreen.png);
+   background: url(/images/titleScreen.png);
    background-repeat: no-repeat;
 }
   
