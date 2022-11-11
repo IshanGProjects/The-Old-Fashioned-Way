@@ -42,9 +42,15 @@
                     <button type="submit" style="margin-left: auto; margin-right: auto; margin-top: 12px;" class="nes-btn is-warning">LOGIN player 2</button>
                 </form>
             <% } %>
+            <% if(locals.Username2 && locals.Username) { %>
             <form action="/game" method="GET">
                 <button type="submit" style="margin-left: auto; margin-right: auto; margin-top: 36px;" class="nes-btn is-success">START GAME</button>
             </form>
+            <% } else { %> 
+                <div class="tooltiptext">
+                    <button type="button" class="nes-btn is-disabled" data-toggle="tooltip" data-placement="top" title="Singin With User 2">Please Sign in With User 2</button>
+                </div>
+            <% } %>    
     </div>
 </main>
 
