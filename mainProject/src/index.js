@@ -465,8 +465,6 @@ app.post("/placeBet", auth, (req, res) =>{
   //console.log(req.body.p2Bf);
   //console.log(req.body.p1Bf);
 
-  Query = `INSERT INTO `
-  
   player1Balance = req.body.p1Bf;
   player2Balance = req.body.p2Bf;
 
@@ -567,13 +565,70 @@ app.post("/placeBet", auth, (req, res) =>{
 
       player1Balance: req.body.p1Bf,
       player2Balance: req.body.p2Bf,
-      wager : req.body.balanceInput,
-      error: true,
+      wager : req.body.balanceInput
     });
 
 
 
   }
+
+
+
+});
+
+app.post("/confirmPlaceBet", auth, async(req, res) =>{
+  wagerPlace = wager *2;
+  
+  MatchTablequery = `INSERT INTO Matches(MatchCaption,Victor,Wager) VALUES ('${req.body.matchCaption}', 'NoOne', '${wagerPlace }');`;
+  UpdateUser1Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user.Username}'`;
+  UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username}'`;
+  //query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user.Username}'`
+  //query = `INSERT INTO Users (Email, Username, Country, Password, CurrencyBalance, TotalWins, TotalLosses) VALUES ('${email}', '${username}', '${country}', '${hash}', 100, 0, 0);`;
+
+  if(req.body.matchCaption == ""){
+    res.render("pages/betConfirm", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+
+      player1Balance: req.body.p1Bf,
+      player2Balance: req.body.p2Bf,
+      error: true,
+      message: "Please Type In A Match Caption On Why You Are Betting.",
+    });
+  }
+
+  else{
+    await db.query(UpdateUser1Query);
+    await db.query(UpdateUser2Query);
+
+    db.any(MatchTablequery)
+      .then(function () {
+        res.redirect('/game');
+      })
+      .catch(function (err) {
+        res.render('pages/register',  {
+          error: true,
+          message: err,
+        });
+        console.log(err);
+      });
+
+
+
+  }
+
+
 
 
 
