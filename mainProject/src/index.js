@@ -114,6 +114,24 @@ app.get('/registerUser2', (req, res) => {
   res.render('pages/registerUser2');
 })
 
+app.get('/placeBet', auth, (req, res) => {
+    res.render('pages/placeBet',{
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+    });
+});
+
 app.get('/main', auth, (req, res) => {
   if(user2.Username == undefined) {
     res.render('pages/main',{

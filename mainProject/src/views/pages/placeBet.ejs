@@ -1,0 +1,46 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/message') %>
+
+<main>
+    
+    <div class="row h-100">
+        <div class="col my-auto">
+            <div class="card" style="margin: auto; padding: 10px; width: 36rem;">
+                <div class="nes-container with-title">
+                    <h3 class="title" style="font-size: 24px;">Place Wagers:</h3>
+                    <form action="/loginUser2" method="POST">
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <label id="p1B" style="color: #ffffff; font-size: 14px;"  value = "<%= Username%>" >   </label>
+                            <input  class="nes-input is-dark" disabled="disabled"  type="hidden" id="content" value="<%= CurrencyBalance %>"></input>
+                            <p>&nbsp</p>
+                            <input type="number" id="dark_field" class="nes-input is-dark"  name="balanceInput" onkeyup="myFunction()">
+                            <script>
+                                function myFunction() {
+                                  var x = document.getElementById("dark_field");
+                                  console.log(x.value);
+                                  var print = document.getElementById("p1B");
+                                  console.log(content.value)
+                                  print.innerHTML = (content.value - x.value);
+                                }
+                            </script>
+                        </div>
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <label style="color: #ffffff; font-size: 14px;">Password:</label>
+                            <input type="password" id="dark_field" class="nes-input is-dark" id="password" name="password">
+                        </div>
+                        <div style="padding: 1rem;" class="nes-field">
+                            <span for="dark_field" style="font-size: 12px;">Don't Have an Account? <a href="/registerUser2">Register</a></span>
+                        </div>
+                        <button type="submit" style="float: right; margin: 10px;" class="nes-btn is-error">login</button>
+                        <a href="/main">
+                            <button type="button" style="float: right; margin: 10px;" class="nes-btn">close</button>
+                        </a>
+                        <i class="nes-icon coin is-large"></i>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include ('../partials/footer') %>
