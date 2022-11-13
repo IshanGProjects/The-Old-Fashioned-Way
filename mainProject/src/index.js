@@ -617,6 +617,7 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
         res.redirect('/game');
       })
       .catch(function (err) {
+
         res.render('pages/betConfirm',  {
           error: true,
           message: err,
