@@ -1,0 +1,55 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/message') %>
+
+<main>
+    
+    <div class="row h-100">
+        <div class="col my-auto">
+            <div class="card" style="margin: auto; padding: 10px; width: 36rem;">
+                <div class="nes-container with-title">
+                    <h3 class="title" style="font-size: 24px;">Place A Wager:</h3>
+                    <form action="/placeBet" method="POST">
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <p>Current Balance in Account For <%= Username %>:</p>
+                            <label id="p1B" style="color: white; font-size: 14px;"><%= CurrencyBalance %></label>
+                            
+                            <input id="p1Bf" name="p1Bf" type="hidden" value=""/>
+                            <p style="color: aqua;" >Current Balance in Account For <%= Username2 %>:</p>
+                            <label id="p2B" name ="p2B" style="color: white; font-size: 14px;"><%= CurrencyBalance2 %></label>
+                            <input id="p2Bf" name="p2Bf" type="hidden" value=""/>
+                            <input  class="nes-input is-dark" disabled="disabled"  type="hidden" id="content" value="<%= CurrencyBalance %>"></input>
+                            <p>&nbsp</p>
+                            <input  class="nes-input is-dark" disabled="disabled"  type="hidden" id="content2" value="<%= CurrencyBalance2 %>"></input>
+                            <input type="number" id="dark_field" class="nes-input is-dark"  placeholder="Enter Coin Wager" name="balanceInput" onkeyup="realTimeBalanceUpdater()">
+                            
+                            <script>
+                                function realTimeBalanceUpdater() {
+                                //this function populates label to whatever the user types in.
+                                  var x = document.getElementById("dark_field");
+                                  console.log(x.value);
+                                  var print1 = document.getElementById("p1B");
+                                  var print2 = document.getElementById("p2B");
+                                  console.log(content.value)
+                                  console.log("value 2" + content2.value)
+                                  //Mirroiring the Form Labels for Real time Updates
+                                  print1.innerHTML = (content.value - x.value);
+                                  print2.innerHTML = (content2.value - x.value);
+                                  //Updating the forms
+                                  document.getElementById("p1Bf").value = (content.value - x.value);
+                                  document.getElementById("p2Bf").value = (content2.value - x.value);
+                                }
+                            </script>
+                        </div>
+                        <button type="submit" style="float: right; margin: 10px;" class="nes-btn is-success">BET</button>
+                        <a href="/main">
+                            <button type="button" style="float: right; margin: 10px;" class="nes-btn">close</button>
+                        </a>
+                        <i class="nes-icon coin is-large"></i>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include ('../partials/footer') %>
