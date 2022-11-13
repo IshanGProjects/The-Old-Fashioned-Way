@@ -7,32 +7,35 @@
         <div class="col my-auto">
             <div class="card" style="margin: auto; padding: 10px; width: 36rem;">
                 <div class="nes-container with-title">
-                    <h3 class="title" style="font-size: 24px;">Place Wagers:</h3>
+                    <h3 class="title" style="font-size: 24px;">Place A Wager:</h3>
                     <form action="/loginUser2" method="POST">
                         <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
-                            <label id="p1B" style="color: #ffffff; font-size: 14px;"  value = "<%= Username%>" >   </label>
+                            <p>Current Balance in Account For <%= Username %>:</p>
+                            <label id="p1B" style="color: white; font-size: 14px;"><%= CurrencyBalance %></label>
+                            <p style="color: aqua;" >Current Balance in Account For <%= Username2 %>:</p>
+                            <label id="p2B" style="color: white; font-size: 14px;"><%= CurrencyBalance2 %></label>
+
                             <input  class="nes-input is-dark" disabled="disabled"  type="hidden" id="content" value="<%= CurrencyBalance %>"></input>
                             <p>&nbsp</p>
-                            <input type="number" id="dark_field" class="nes-input is-dark"  name="balanceInput" onkeyup="myFunction()">
+                            <input  class="nes-input is-dark" disabled="disabled"  type="hidden" id="content2" value="<%= CurrencyBalance2 %>"></input>
+                            <input type="number" id="dark_field" class="nes-input is-dark"  placeholder="Enter Coin Wager" name="balanceInput" onkeyup="realTimeBalanceUpdater()">
+                            
                             <script>
-                                function myFunction() {
+                                function realTimeBalanceUpdater() {
                                 //this function populates label to whatever the user types in.
                                   var x = document.getElementById("dark_field");
                                   console.log(x.value);
-                                  var print = document.getElementById("p1B");
+                                  var print1 = document.getElementById("p1B");
+                                  var print2 = document.getElementById("p2B");
                                   console.log(content.value)
-                                  print.innerHTML = (content.value - x.value);
+                                  console.log("value 2" + content2.value)
+                                  print1.innerHTML = (content.value - x.value);
+                                  print2.innerHTML = (content2.value- x.value);
+                                  
                                 }
                             </script>
                         </div>
-                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
-                            <label style="color: #ffffff; font-size: 14px;">Password:</label>
-                            <input type="password" id="dark_field" class="nes-input is-dark" id="password" name="password">
-                        </div>
-                        <div style="padding: 1rem;" class="nes-field">
-                            <span for="dark_field" style="font-size: 12px;">Don't Have an Account? <a href="/registerUser2">Register</a></span>
-                        </div>
-                        <button type="submit" style="float: right; margin: 10px;" class="nes-btn is-error">login</button>
+                        <button type="submit" style="float: right; margin: 10px;" class="nes-btn is-success">Bet</button>
                         <a href="/main">
                             <button type="button" style="float: right; margin: 10px;" class="nes-btn">close</button>
                         </a>
