@@ -208,6 +208,51 @@ app.get('/edit_name2', auth, (req, res) => {
     TotalLosses: req.session.user2.TotalLosses,
   });
 });
+// LeaderBoard Get 
+app.get('/main_lb', async (req, res) => {
+
+  const query = 'SELECT Username, Country, TotalWins FROM Users ORDER BY TotalWins LIMIT 10';
+  db.any(query)
+
+  .then((data) => {
+    console.log(data);
+    res.render("pages/main_lb", {
+      data,
+    });
+    
+  })
+  .catch((err) => {
+
+    console.log(err);
+    res.render("pages/main", {
+      error: true,
+      message: "Data is retrieved incorrectly",
+    });
+  });  
+});
+
+// LeaderBoard Filter[coins] GET 
+app.get('/lb_filter_coin', async (req, res) => {
+  //the logic goes here
+  const query = 'SELECT Username, Country, CurrencyBalance FROM Users ORDER BY CurrencyBalance LIMIT 10';
+  db.any(query)
+
+  .then((data) => {
+    console.log(data);
+    res.render("pages/lb_filter_coins", {
+      data,
+    });
+    
+  })
+  .catch((err) => {
+
+    console.log(err);
+    res.render("pages/main", {
+      error: true,
+      message: "Data is retrieved incorrectly",
+    });
+  });  
+});
 
 //Get Request for Game
 app.get('/game', (req,res) =>{
@@ -217,6 +262,8 @@ app.get('/game', (req,res) =>{
 app.get('"/betConfirm"', auth, (req,res) =>{
   res.render('/pages/betConfirm')
 });
+
+
 
 app.post('/edit_name', auth, (req, res) => {
   const newUsername = req.body.username;
@@ -461,28 +508,7 @@ app.post("/loginUser2", (req, res) => {
   }
 });
 
-// LeaderBoard Post  
-app.get('/main_lb', async (req, res) => {
-  //the logic goes here
-  const query = 'SELECT Username, Country, TotalWins FROM Users ORDER BY TotalWins';
-  db.any(query)
 
-  .then((data) => {
-    console.log(data);
-    res.render("pages/main_lb", {
-      data,
-    });
-    
-  })
-  .catch((err) => {
-
-    console.log(err);
-    res.render("pages/main", {
-      error: true,
-      message: "Data is retrieved incorrectly",
-    });
-  });  
-});
 
 // PlaceBet Post 
 app.post("/placeBet", auth, (req, res) =>{

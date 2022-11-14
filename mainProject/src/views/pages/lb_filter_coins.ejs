@@ -11,21 +11,22 @@
 </form>
 <!-- Different Filter Selection -->
 <div class="row">
-  <form action="/lb_filter_coin"method="GET">
-    <button type="submit" style="position: absolute; top: 60px; left: 250px; max-width:fit-content;font-size: 8px; " class="nes-btn is-success">Filter [COINS]</button>
-  </form>
-<!-- Leaderboard Main -->
+    <form action="/main_lb"method="GET">
+      <button type="submit" style="position: absolute; top: 60px; left: 250px; max-width:fit-content;font-size: 8px; " class="nes-btn is-success">Filter [WINS]</button>
+    </form>
 </div>
+<!-- Leaderboard Main -->
 <div class="container" style="padding-top: 60px;">
 <div class="nes-container is-dark with-title is-centered" style="margin: auto;max-width: 560px;">
   <h3 class="title">The Old Fashion Way </h3>
+
   <div class="nes-table-responsive ">
     <table class="nes-table is-bordered is-dark "  style="margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto;">
       <thead>
         <tr>
           <th>Username</th>
           <th>Country</th>
-          <th>Totalwins</th>
+          <th>Currency</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +34,7 @@
         <tr>
           <td><%=lb.username%></td>
           <td><%=lb.country%></td>
-          <td><%=lb.totalwins%></td>
+          <td><%=lb.CurrencyBalance%></td>
         </tr>
         <%});%>
       </tbody>
