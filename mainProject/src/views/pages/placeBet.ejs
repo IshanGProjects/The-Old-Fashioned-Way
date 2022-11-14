@@ -2,25 +2,26 @@
 <%- include ('../partials/message') %>
 
 <main>
-    
     <div class="row h-100">
         <div class="col my-auto">
             <div class="card" style="margin: auto; padding: 10px; width: 36rem;">
                 <div class="nes-container with-title">
-                    <h3 class="title" style="font-size: 24px;">Place A Wager:</h3>
+                    <h3 class="title">PLACE A WAGER</h3>
                     <form action="/placeBet" method="POST">
                         <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
-                            <p>Current Balance in Account For <%= Username %>:</p>
-                            <label id="p1B" style="color: white; font-size: 14px;"><%= CurrencyBalance %></label>
-                            
+                            <p style="color: #f6c244; font-size: 12px;">Current Balance for Player 1,</p>
+                                <p style="color: #f6c244; font-size: 18px;"> <%= Username %>:</p>
+                            <label id="p1B" style="color: #ffffff;"><%= CurrencyBalance %></label>
+                            <p><br></p>
                             <input id="p1Bf" name="p1Bf" type="hidden" value=""/>
-                            <p style="color: aqua;" >Current Balance in Account For <%= Username2 %>:</p>
-                            <label id="p2B" name ="p2B" style="color: white; font-size: 14px;"><%= CurrencyBalance2 %></label>
+                            <p style="color: #b0b0b0; font-size: 12px;" >Current Balance for Player 2,</p>
+                            <p style="color: #b0b0b0; font-size: 18px;"> <%= Username2 %>:</p>
+                            <label id="p2B" name ="p2B" style="color: #ffffff;"><%= CurrencyBalance2 %></label>
+                            <p><br></p>
                             <input id="p2Bf" name="p2Bf" type="hidden" value=""/>
-                            <input  class="nes-input is-dark" disabled="disabled"  type="hidden" id="content" value="<%= CurrencyBalance %>"></input>
-                            <p>&nbsp</p>
-                            <input  class="nes-input is-dark" disabled="disabled"  type="hidden" id="content2" value="<%= CurrencyBalance2 %>"></input>
-                            <input type="number" id="dark_field" class="nes-input is-dark"  placeholder="Enter Coin Wager" name="balanceInput" onkeyup="realTimeBalanceUpdater()">
+                            <input class="nes-input is-dark" disabled="disabled" type="hidden" id="content" value="<%= CurrencyBalance %>"></input>
+                            <input class="nes-input is-dark" disabled="disabled" type="hidden" id="content2" value="<%= CurrencyBalance2 %>"></input>
+                            <input type="number" id="dark_field" class="nes-input is-dark" placeholder="enter coin wager..." name="balanceInput" onkeyup="realTimeBalanceUpdater()">
                             
                             <script>
                                 function realTimeBalanceUpdater() {
@@ -40,11 +41,11 @@
                                 }
                             </script>
                         </div>
-                        <button type="submit" style="float: right; margin: 10px;" class="nes-btn is-success">BET</button>
+                        <button type="submit" style="float: right; margin-top: 25px; margin-left: 10px; margin-right: 10px;" class="nes-btn is-success">BET</button>
                         <a href="/main">
-                            <button type="button" style="float: right; margin: 10px;" class="nes-btn">close</button>
+                            <button type="button" style="float: right; margin-top: 25px; margin-left: 10px; margin-right: 10px;" class="nes-btn">close</button>
                         </a>
-                        <i class="nes-icon coin is-large"></i>
+                        <i class="nes-icon coin is-large" style="margin-top: 15px;"></i>
                     </form>
                 </div>
             </div>
