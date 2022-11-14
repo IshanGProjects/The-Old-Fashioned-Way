@@ -1,53 +1,58 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/message') %>
 
-<div class="nes-container with-title" style="max-width: 960px; margin:auto; margin-top: 45px;">
-    <h3 class="title">EDIT PROFILE</h3>
-    <div class="nes-container" style="margin-top: 30px; margin-bottom: 30px;">
-        <center>
-            <button class="btn btn-secondary"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
-                alt="Snorlax" height="200" width="200" /></button>
-        </center>
-        <table style="width:100%;">
-            <tr>
-                <td style="font-size: 22px; width:30%;">Username: </td>
-                <td>
-                    <% if(locals.Username == locals.Player1) { %>
-                        <form action="/edit_name" method="post">
-                            <div class="nes-field is-inline">
-                                <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username" required>
-                            </div>
-                            <td>
-                                <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
-                            </td>
-                        </form>
-                    <% } else { %>
-                        <form action="/edit_name2" method="post">
-                            <div class="nes-field is-inline">
-                                <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username" required>
-                            </div>
-                            <td>
-                                <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
-                            </td>
-                        </form>
-                    <% } %>             
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size: 22px;">Country:</td> <th style="font-size: 22px;"><%= Country %></th>
-            </tr>
-            <tr>
-                <td style="font-size: 22px;">Record:</td> <th style="font-size: 22px;"><%= TotalWins %> wins <%= TotalLosses %> lose</th>    
-            </tr>
-            <tr>
-                <td style="font-size: 22px;">Coins:</td> <th style="font-size: 22px;"><%= CurrencyBalance %></th>
-            </tr>
-        </table>
+<main>
+    <div class="container" style="padding-top: 60px;">
+        <div class="nes-container is-dark with-title" style="max-width: 960px; margin:auto;">
+            <h3 class="title">EDIT PROFILE</h3>
+            <div class="nes-container is-dark" style="margin-top: 30px; margin-bottom: 30px;">
+                <center>
+                    <button class="btn btn-secondary"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
+                        alt="Snorlax" height="200" width="200" /></button>
+                </center>
+                <table style="width:100%;">
+                    <tr>
+                        <td style="font-size: 22px; width:30%;">Username: </td>
+                        <td>
+                            <% if(locals.Username == locals.Player1) { %>
+                                <form action="/edit_name" method="post">
+                                    <div class="nes-field is-inline">
+                                        <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username" required>
+                                    </div>
+                                    <td>
+                                        <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
+                                    </td>
+                                </form>
+                            <% } else { %>
+                                <form action="/edit_name2" method="post">
+                                    <div class="nes-field is-inline">
+                                        <input type="text" id="dark_field" class="nes-input is-dark" id="username" name="username" required>
+                                    </div>
+                                    <td>
+                                        <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
+                                    </td>
+                                </form>
+                            <% } %>             
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 22px;">Country:</td> <th style="font-size: 22px;"><%= Country %></th>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 22px;">Record:</td> <th style="font-size: 22px;"><%= TotalWins %> wins <%= TotalLosses %> lose</th>    
+                    </tr>
+                    <tr>
+                        <td style="font-size: 22px;">Coins:</td> <th style="font-size: 22px;"><%= CurrencyBalance %></th>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <a href="/profile">
+                    <button type="button" style="float:left;" class="nes-btn is-error">Cancel</button>
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="row">
-        <a href="/profile">
-            <button type="button" style="float:left;" class="nes-btn is-error">Cancel</button>
-        </a>
-    </div>
-</div>
+</main>
+
 <%- include ('../partials/footer') %>
