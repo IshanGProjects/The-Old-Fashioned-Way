@@ -1,0 +1,34 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/message') %>
+
+<main>
+    
+    <div class="row h-100">
+        <div class="col my-auto">
+            <div class="card" style="margin: auto; padding: 10px; width: 36rem;">
+                <div class="nes-container with-title">
+                    <h3 class="title" style="font-size: 24px;">Confirm Wager:</h3>
+                    <form action="/confirmPlaceBet" method="POST">
+                        <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
+                            <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
+                                <label for="dark_field" style="color:red;">Total Bet:</label>
+                                <input disabled type="text" style="color:yellow;" id="dark_field" name = "totalWager" class="nes-input is-dark" value = <%= Number(wager) *2 %>>
+                              </div>
+                              <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
+                                <label for="dark_field" style="color:red;">Match Caption: </label>
+                                <input type="text" style="color:yellow;" id="dark_field" class="nes-input is-dark" name = "matchCaption">
+                              </div>
+                        </div>
+                        <button type="submit" style="float: right; margin: 10px;" class="nes-btn is-success">Confirm</button>
+                        <a href="/placeBet">
+                            <button type="button" style="float: right; margin: 10px;" class="nes-btn is-error">Cancel</button>
+                        </a>
+                        <i class="nes-icon trophy is-large"></i>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include ('../partials/footer') %>

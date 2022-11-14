@@ -114,6 +114,24 @@ app.get('/registerUser2', (req, res) => {
   res.render('pages/registerUser2');
 })
 
+app.get('/placeBet', auth, (req, res) => {
+    res.render('pages/placeBet',{
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+    });
+});
+
 app.get('/main', auth, (req, res) => {
   if(user2.Username == undefined) {
     res.render('pages/main',{
@@ -194,6 +212,10 @@ app.get('/edit_name2', auth, (req, res) => {
 //Get Request for Game
 app.get('/game', (req,res) =>{
   res.render('gameData/jsPong/index');
+});
+
+app.get('"/betConfirm"', auth, (req,res) =>{
+  res.render('/pages/betConfirm')
 });
 
 app.post('/edit_name', auth, (req, res) => {
@@ -437,6 +459,180 @@ app.post("/loginUser2", (req, res) => {
       });
     });
   }
+});
+
+app.post("/placeBet", auth, (req, res) =>{
+  //console.log(req.body.p2Bf);
+  //console.log(req.body.p1Bf);
+
+  player1Balance = req.body.p1Bf;
+  player2Balance = req.body.p2Bf;
+
+  wager = req.body.balanceInput;
+  if(Number(wager) == 0){
+    res.render("pages/placeBet", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+      error: true,
+      message: "Please type in a bet.",
+    });
+
+  }
+
+  else if(player1Balance < 0){
+    res.render("pages/placeBet", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+      error: true,
+      message: "Player 2 Please Put A Bet That Player 1 Can Afford.",
+    });
+  }
+  else if(player2Balance < 0){
+    res.render("pages/placeBet", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+      error: true,
+      message: "Player 1 Please Put A Bet That Player 2 can Afford.",
+    });
+  }
+  else if(player2Balance < 0 && player1Balance < 0) {
+    res.render("pages/placeBet", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+      error: true,
+      message: "Both Player 1 and Player 2 Cannot Afford This Bet, Choose a Bet that Is Sufficient For Both Players.",
+    });
+  }
+  else{
+    res.render("pages/betConfirm", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+
+      player1Balance: req.body.p1Bf,
+      player2Balance: req.body.p2Bf,
+      wager : req.body.balanceInput
+    });
+
+
+
+  }
+
+
+
+});
+
+app.post("/confirmPlaceBet", auth, async(req, res) =>{
+  wagerPlace = wager *2;
+  
+  MatchTablequery = `INSERT INTO Matches(MatchCaption,Victor,Wager) VALUES ('${req.body.matchCaption}', 'NoOne', '${wagerPlace }');`;
+  UpdateUser1Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user.Username}'`;
+  UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username}'`;
+  //query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user.Username}'`
+  //query = `INSERT INTO Users (Email, Username, Country, Password, CurrencyBalance, TotalWins, TotalLosses) VALUES ('${email}', '${username}', '${country}', '${hash}', 100, 0, 0);`;
+
+  if(req.body.matchCaption == ""){
+    res.render("pages/betConfirm", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+
+      player1Balance: req.body.p1Bf,
+      player2Balance: req.body.p2Bf,
+      error: true,
+      message: "Please Type In A Match Caption On Why You Are Betting.",
+    });
+  }
+
+  else{
+    await db.query(UpdateUser1Query);
+    await db.query(UpdateUser2Query);
+
+    db.any(MatchTablequery)
+      .then(function () {
+        res.redirect('/game');
+      })
+      .catch(function (err) {
+
+        res.render('pages/betConfirm',  {
+          error: true,
+          message: err,
+        });
+        console.log(err);
+      });
+
+
+
+  }
+
+
+
+
+
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
