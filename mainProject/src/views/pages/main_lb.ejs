@@ -1,0 +1,60 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/message') %>
+
+
+<!--
+    <div class="nes-container is-rounded is-dark" style="width:500px;height:400px;line-height:3em;overflow:auto;padding:5px; position:absolute; top:100px ; left:100px;
+            color: aqua;">
+        <h2 class="title" style="color:#ffffff ;">Match History</h2>
+        This 'div' element uses 'overflow:auto' to create scrollbars.
+        <br>
+        1 vs. 2 |   1 WIN  |  Coins: 100
+        <br>
+        2 vs. 3 |   2 WIN  |  Coins: 100
+        <br>
+        3 vs. 4 |   3 WIN  |  Coins: 100
+        <br>
+        3 vs. 4 |   3 WIN  |  Coins: 100
+        <br>
+        3 vs. 4 |   3 WIN  |  Coins: 100
+        <br>
+        3 vs. 4 |   3 WIN  |  Coins: 100
+    </div>
+-->
+
+<main>
+    <div class="row">
+        <form action="/main" method="GET">
+            <button type="submit" style="position:absolute; top: 20px; right: 20px;" class="nes-btn is-error">BACK</button>
+        </form>>
+    </div>
+    <center><div class="nes-table-responsive ">
+        <table class="nes-table is-bordered is-dark " style=" position:absolute; top: 20px; left: 20px; width: 30%;">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Country</th>
+              <th>Totalwins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach(function(lb){ %>
+            <tr>
+              <td><%=lb.username%></td>
+              <td><%=lb.country%></td>
+              <td><%=lb.totalwins%></td>
+            </tr>
+            <%});%>
+          </tbody>
+        </table>
+      </div>
+    </center>
+    <div class="container-fluid" style="padding-top: 100px;">
+        <div class="titleScreen"></div>
+    </div>
+    
+
+
+</main>
+
+<%- include ('../partials/footer') %>

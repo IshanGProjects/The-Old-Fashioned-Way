@@ -461,6 +461,30 @@ app.post("/loginUser2", (req, res) => {
   }
 });
 
+// LeaderBoard Post  
+app.get('/main_lb', async (req, res) => {
+  //the logic goes here
+  const query = 'SELECT Username, Country, TotalWins FROM Users ORDER BY TotalWins';
+  db.any(query)
+
+  .then((data) => {
+    console.log(data);
+    res.render("pages/main_lb", {
+      data,
+    });
+    
+  })
+  .catch((err) => {
+
+    console.log(err);
+    res.render("pages/main", {
+      error: true,
+      message: "Data is retrieved incorrectly",
+    });
+  });  
+});
+
+// PlaceBet Post 
 app.post("/placeBet", auth, (req, res) =>{
   //console.log(req.body.p2Bf);
   //console.log(req.body.p1Bf);
