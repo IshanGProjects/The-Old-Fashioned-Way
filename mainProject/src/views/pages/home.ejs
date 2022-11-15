@@ -1,25 +1,17 @@
 <%- include ('../partials/header') %>
 <%- include ('../partials/message') %>
 
-<main class="homeBack" id = "homeback">
-    
+<main class="homeBack" id="homeback">
     <div class="controller">
-            <p>    &nbsp       </p>
-            
-            <form action="/login" method = "GET">
-                <button type="submit" class="nes-btn is-error" id = "loginButton">Login</button>
-               </form>
-             <br>
-             
-
-             <form action="/register" method = "GET">
-             <button type="submit" class="nes-btn is-primary">Register</button>
-            </form>
-             
+        <p>&nbsp</p>
+        <form action="/login" method = "GET">
+            <button type="submit" class="nes-btn is-warning" id = "loginButton">LOGIN</button>
+        </form>
+        <br>
+        <form action="/register" method = "GET">
+            <button type="submit" class="nes-btn is-primary">REGISTER</button>
+        </form>
     </div>
-    
-  
- </main>
-
+</main>
 
 <%- include ('../partials/footer') %>

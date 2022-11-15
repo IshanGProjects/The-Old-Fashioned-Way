@@ -9,14 +9,14 @@
                     <h3 class="title">PLACE A WAGER</h3>
                     <form action="/placeBet" method="POST">
                         <div style="background-color:#212529; padding: 1rem;" class="nes-field is-dark">
-                            <p style="color: #f6c244; font-size: 12px;">Current Balance for Player 1,</p>
-                                <p style="color: #f6c244; font-size: 18px;"> <%= Username %>:</p>
-                            <label id="p1B" style="color: #ffffff;"><%= CurrencyBalance %></label>
+                            <div style="color: #f6c244; font-size: 12px;">Current Balance for Player 1,</div>
+                            <div style="color: #f6c244; font-size: 18px; margin-top: 8px; margin-bottom: 16px;"> <%= Username %>:</div>
+                            <label id="p1B" style="color: #ffffff; font-size: 24px;"><%= CurrencyBalance %></label>
                             <p><br></p>
                             <input id="p1Bf" name="p1Bf" type="hidden" value=""/>
-                            <p style="color: #b0b0b0; font-size: 12px;" >Current Balance for Player 2,</p>
-                            <p style="color: #b0b0b0; font-size: 18px;"> <%= Username2 %>:</p>
-                            <label id="p2B" name ="p2B" style="color: #ffffff;"><%= CurrencyBalance2 %></label>
+                            <div style="color: #b0b0b0; font-size: 12px;" >Current Balance for Player 2,</div>
+                            <div style="color: #b0b0b0; font-size: 18px; margin-top: 8px; margin-bottom: 16px;"> <%= Username2 %>:</div>
+                            <label id="p2B" name ="p2B" style="color: #ffffff; font-size: 24px;"><%= CurrencyBalance2 %></label>
                             <p><br></p>
                             <input id="p2Bf" name="p2Bf" type="hidden" value=""/>
                             <input class="nes-input is-dark" disabled="disabled" type="hidden" id="content" value="<%= CurrencyBalance %>"></input>
