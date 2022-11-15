@@ -11,27 +11,27 @@
         <div class="item" style="background-color:#212529; padding: 1rem 0;">
             <% if (FILTER == 1) { %>
                 <form action="/leaderboard" method="POST">
-                    <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
                     <label>
                         <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="0">
-                        <span>WINS</span>
+                        <span style="color: #eae554">WINS</span>
                     </label>
                     <label>
                         <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="1" checked>
-                        <span>COINS</span>
+                        <span style="color: #f6c244">COINS</span>
                     </label>
+                    <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
                 </form>
             <% } else { %>
                 <form action="/leaderboard" method="POST">
-                    <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
                     <label>
                         <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="0" checked>
-                        <span>WINS</span>
+                        <span style="color: #f6c244">WINS</span>
                     </label>
                     <label>
                         <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="1">
-                        <span>COINS</span>
+                        <span style="color: #eae554">COINS</span>
                     </label>
+                    <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
                 </form>
             <% } %>
         </div>
