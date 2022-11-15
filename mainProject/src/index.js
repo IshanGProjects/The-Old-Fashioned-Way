@@ -515,7 +515,7 @@ app.post("/placeBet", auth, (req, res) =>{
   player2Balance = req.body.p2Bf;
 
   wager = req.body.balanceInput;
-  if(Number(wager) == 0){
+  if(Number(wager) == 0 ){
     res.render("pages/placeBet", {
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -532,6 +532,27 @@ app.post("/placeBet", auth, (req, res) =>{
       TotalLosses2: req.session.user2.TotalLosses,
       error: true,
       message: "Please type in a bet.",
+    });
+
+  }
+
+  if(Number(wager) < 0 ){
+    res.render("pages/placeBet", {
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+
+      Username2: req.session.user2.Username,
+      Email2: req.session.user2.Email,
+      Country2: req.session.user2.Country,
+      CurrencyBalance2: req.session.user2.CurrencyBalance,
+      TotalWins2: req.session.user2.TotalWins,
+      TotalLosses2: req.session.user2.TotalLosses,
+      error: true,
+      message: "Please type in a bet that is not negative.",
     });
 
   }
