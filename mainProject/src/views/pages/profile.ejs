@@ -11,12 +11,12 @@
                     <% if (locals.Username == locals.Player1) { %>
                         <form action="/changeUrl" method="GET">
                             <button class="btn btn-secondary" type = "submit"><img src=<%= ImageURL %>
-                                alt="Snorlax" height="200" width="200" /></button>
+                                alt="Player1Image" height="200" width="200" /></button>
                         </form>
                     <% } else { %>
                         <form action="/changeUrl2" method="GET">
                             <button class="btn btn-secondary" type = "submit"><img src=<%= ImageURL %>
-                                alt="Snorlax" height="200" width="200" /></button>
+                                alt="Player2Image" height="200" width="200" /></button>
                         </form>
                     <% } %>
                 </center>

@@ -273,6 +273,7 @@ app.get("/changeUrl", auth, (req,res) =>{
     CurrencyBalance: req.session.user.CurrencyBalance,
     TotalWins: req.session.user.TotalWins,
     TotalLosses: req.session.user.TotalLosses,
+    ImageURL: req.session.user.ImageURL,
   });
 });
 
@@ -285,6 +286,7 @@ app.get("/changeUrl2", auth, (req,res) =>{
     CurrencyBalance: req.session.user2.CurrencyBalance,
     TotalWins: req.session.user2.TotalWins,
     TotalLosses: req.session.user2.TotalLosses,
+    ImageURL: req.session.user2.ImageURL,
   });
 });
 
@@ -304,6 +306,7 @@ app.post('/edit_name', auth, (req, res) => {
           CurrencyBalance: req.session.user.CurrencyBalance,
           TotalWins: req.session.user.TotalWins,
           TotalLosses: req.session.user.TotalLosses,
+          ImageURL: req.session.user.ImageURL,
         });
       })
       .catch(function (err) {
@@ -339,6 +342,7 @@ app.post('/edit_name2', auth, (req, res) => {
           CurrencyBalance: req.session.user2.CurrencyBalance,
           TotalWins: req.session.user2.TotalWins,
           TotalLosses: req.session.user2.TotalLosses,
+          ImageURL: req.session.user2.ImageURL,
         });
       })
       .catch(function (err) {
@@ -356,6 +360,88 @@ app.post('/edit_name2', auth, (req, res) => {
         });
         console.log(err);
       });
+});
+
+app.post('/editImageProfile1',auth, (req, res) => {
+  const newImageURL = req.body.imageURL;
+
+  console.log(req.body.imageURL);
+
+  query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user.Username}'`
+
+
+  db.any(query)
+  .then(function () {
+    req.session.user.ImageURL = newImageURL;
+
+    res.render('pages/profile', {
+      Player1: req.session.user.Username,
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+      ImageURL: req.session.user.ImageURL,
+    });
+  })
+  .catch(function (err) {
+    res.render('pages/profile',  {
+      error: true,
+      message: "ERROR WITH URL",
+      Player1: req.session.user.Username,
+      Username: req.session.user.Username,
+      Email: req.session.user.Email,
+      Country: req.session.user.Country,
+      CurrencyBalance: req.session.user.CurrencyBalance,
+      TotalWins: req.session.user.TotalWins,
+      TotalLosses: req.session.user.TotalLosses,
+      ImageURL: req.session.user.ImageURL,
+    });
+    console.log(err);
+  });
+
+});
+
+app.post('/editImageProfile2',auth, (req, res) => {
+  const newImageURL = req.body.imageURL;
+
+  console.log(req.body.imageURL);
+
+  query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user2.Username}'`
+
+
+  db.any(query)
+  .then(function () {
+    req.session.user2.ImageURL = newImageURL;
+
+    res.render('pages/profile', {
+      Player1: req.session.user.Username,
+      Username: req.session.user2.Username,
+      Email: req.session.user2.Email,
+      Country: req.session.user2.Country,
+      CurrencyBalance: req.session.user2.CurrencyBalance,
+      TotalWins: req.session.user2.TotalWins,
+      TotalLosses: req.session.user2.TotalLosses,
+      ImageURL: req.session.user2.ImageURL,
+    });
+  })
+  .catch(function (err) {
+    res.render('pages/profile',  {
+      error: true,
+      message: "ERROR WITH URL",
+      Player1: req.session.user.Username,
+      Username: req.session.user2.Username,
+      Email: req.session.user2.Email,
+      Country: req.session.user2.Country,
+      CurrencyBalance: req.session.user2.CurrencyBalance,
+      TotalWins: req.session.user2.TotalWins,
+      TotalLosses: req.session.user2.TotalLosses,
+      ImageURL: req.session.user2.ImageURL,
+    });
+    console.log(err);
+  });
+
 });
 
 app.post('/register', async (req, res) => {
