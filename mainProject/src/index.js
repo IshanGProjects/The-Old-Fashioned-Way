@@ -170,6 +170,7 @@ app.get('/profile', auth, (req, res) => {
     CurrencyBalance: req.session.user.CurrencyBalance,
     TotalWins: req.session.user.TotalWins,
     TotalLosses: req.session.user.TotalLosses,
+    
   });
 });
 
@@ -255,11 +256,13 @@ app.get('/game', (req,res) =>{
   res.render('gameData/jsPong/index');
 });
 
-app.get('"/betConfirm"', auth, (req,res) =>{
-  res.render('/pages/betConfirm')
+app.get("/betConfirm", auth, (req,res) =>{
+  res.render('/pages/betConfirm');
 });
 
-
+app.get("/changeUrl", auth, (req,res) =>{
+  res.render('pages/editProfileUrl');
+});
 
 app.post('/edit_name', auth, (req, res) => {
   const newUsername = req.body.username;
