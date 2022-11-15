@@ -261,7 +261,27 @@ app.get("/betConfirm", auth, (req,res) =>{
 });
 
 app.get("/changeUrl", auth, (req,res) =>{
-  res.render('pages/editProfileUrl');
+  res.render('pages/editProfileUrl',{
+    Player1: req.session.user.Username,
+    Username: req.session.user.Username,
+    Email: req.session.user.Email,
+    Country: req.session.user.Country,
+    CurrencyBalance: req.session.user.CurrencyBalance,
+    TotalWins: req.session.user.TotalWins,
+    TotalLosses: req.session.user.TotalLosses,
+  });
+});
+
+app.get("/changeUrl2", auth, (req,res) =>{
+  res.render('pages/editProfileUrl',{
+    Player1: req.session.user.Username,
+    Username: req.session.user2.Username,
+    Email: req.session.user2.Email,
+    Country: req.session.user2.Country,
+    CurrencyBalance: req.session.user2.CurrencyBalance,
+    TotalWins: req.session.user2.TotalWins,
+    TotalLosses: req.session.user2.TotalLosses,
+  });
 });
 
 app.post('/edit_name', auth, (req, res) => {
