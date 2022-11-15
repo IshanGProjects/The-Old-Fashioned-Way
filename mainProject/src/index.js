@@ -218,7 +218,7 @@ app.get('/edit_name2', auth, (req, res) => {
 });
 
 // LeaderBoard Get 
-app.post('/leaderboard', async (req, res) => {
+app.post('/leaderboard', auth, async (req, res) => {
   const input = req.body.filter;
   if (input == 1) {
     const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance FROM Users ORDER BY CurrencyBalance DESC LIMIT 10;';
@@ -259,7 +259,7 @@ app.post('/leaderboard', async (req, res) => {
 });
 
 //Get Request for Game
-app.get('/game', (req,res) =>{
+app.get('/game', auth, (req,res) =>{
   res.render('gameData/jsPong/index');
 });
 
