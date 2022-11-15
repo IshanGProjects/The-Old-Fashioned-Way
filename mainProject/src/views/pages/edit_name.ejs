@@ -7,8 +7,8 @@
             <h3 class="title">EDIT PROFILE</h3>
             <div class="nes-container is-dark" style="margin-top: 30px; margin-bottom: 30px;">
                 <center>
-                    <button class="btn btn-secondary"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
-                        alt="Snorlax" height="200" width="200"></button>
+                    <button class="btn btn-secondary"><img src=<%= ImageURL %>
+                        alt="Snorlax" height="200" width="200" /></button>
                 </center>
                 <table style="width:100%;">
                     <tr>
@@ -49,9 +49,15 @@
                 </table>
             </div>
             <div class="row">
-                <a href="/profile">
-                    <button type="button" style="float:left;" class="nes-btn is-error">cancel</button>
-                </a>
+                <% if (locals.Username == locals.Player1) { %>
+                    <form action="/profile" method="GET">
+                        <button type="submit" style="float:left;" class="nes-btn is-error">BACK</button>
+                    </form>
+                <% } else {%>
+                    <form action="/profileUser2" method="GET">
+                        <button type="submit" style="float:left;" class="nes-btn is-error">BACK</button>
+                    </form>
+                <% } %>       
             </div>
         </div>
     </div>

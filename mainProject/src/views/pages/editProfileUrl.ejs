@@ -1,0 +1,55 @@
+<%- include ('../partials/header') %>
+<%- include ('../partials/message') %>
+
+<main>
+    <!-- Profile -->
+    <div class="container" style="padding-top: 60px;">
+        <div class="nes-container is-dark with-title" style="max-width: 960px; margin:auto;">
+            <h3 class="title">EDIT PROFILE IMAGE</h3>
+            <div class="nes-container is-dark" style="margin-top: 30px; margin-bottom: 30px;">
+                
+                <span class="nes-text is-primary">User, <%= Username %> Please Type In an Image URL You Wish To Set Your Profile Too:</span>
+                <h4>&nbsp;</h4>
+                <table style="width:100%;">
+                    <tr>
+                            <td>
+                                <% if (locals.Username == locals.Player1) { %>
+                                <form action="/editImageProfile1" method="POST">
+                                    <div class="nes-field is-inline">
+                                        <input type="url" id="dark_field" class="nes-input is-dark" id="imageURL" name="imageURL" required>
+                                    </div>
+                                    <td>
+                                        <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
+                                    </td>
+                                </form>
+                                <% } else {%>
+                                    <form action="/editImageProfile2" method="POST">
+                                        <div class="nes-field is-inline">
+                                            <input type="url" id="dark_field" class="nes-input is-dark" id="imageURL" name="imageURL" required>
+                                        </div>
+                                        <td>
+                                            <button type="submit" style="float: right;" class="nes-btn is-success">Submit</button>
+                                        </td>
+                                    </form>
+                                <% } %>     
+                            </td> 
+                    </tr>
+                </table>
+            </div>
+            <!-- [Back]Button to main -->
+            <div class="row">  
+                <% if (locals.Username == locals.Player1) { %>
+                    <form action="/profile" method="GET">
+                        <button type="submit" style="float:left;" class="nes-btn is-error">BACK</button>
+                    </form>
+                <% } else {%>
+                    <form action="/profileUser2" method="GET">
+                        <button type="submit" style="float:left;" class="nes-btn is-error">BACK</button>
+                    </form>
+                <% } %>      
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include ('../partials/footer') %>
