@@ -15,9 +15,15 @@
             </div>
             <!-- [Back]Button to main -->
             <div class="row">
-                <a href="/profile">
-                    <button type="button" style="float:left;" class="nes-btn is-error">BACK</button>
-                </a>
+                <% if (locals.Username == locals.Player1) { %>
+                    <form action="/profile" method="GET">
+                        <button type="submit" style="float:left;" class="nes-btn is-error">BACK</button>
+                    </form>
+                <% } else {%>
+                    <form action="/profileUser2" method="GET">
+                        <button type="submit" style="float:left;" class="nes-btn is-error">BACK</button>
+                    </form>
+                <% } %>        
             </div>
         </div>
     </div>
