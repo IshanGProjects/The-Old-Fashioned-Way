@@ -208,50 +208,46 @@ app.get('/edit_name2', auth, (req, res) => {
     TotalLosses: req.session.user2.TotalLosses,
   });
 });
+
 // LeaderBoard Get 
-app.get('/main_lb', async (req, res) => {
-
-  const query = 'SELECT Username, Country, TotalWins FROM Users ORDER BY TotalWins LIMIT 10';
-  db.any(query)
-
-  .then((data) => {
-    console.log(data);
-    res.render("pages/main_lb", {
-      data,
-    });
-    
-  })
-  .catch((err) => {
-
-    console.log(err);
-    res.render("pages/main", {
-      error: true,
-      message: "Data is retrieved incorrectly",
-    });
-  });  
-});
-
-// LeaderBoard Filter[coins] GET 
-app.get('/lb_filter_coin', async (req, res) => {
-  //the logic goes here
-  const query = 'SELECT Username, Country, CurrencyBalance FROM Users ORDER BY CurrencyBalance LIMIT 10';
-  db.any(query)
-
-  .then((data) => {
-    console.log(data);
-    res.render("pages/lb_filter_coins", {
-      data,
-    });
-    
-  })
-  .catch((err) => {
-
-    console.log(err);
-    res.render("pages/main", {
-      error: true,
-      message: "Data is retrieved incorrectly",
-    });
-  });  
+app.post('/leaderboard', async (req, res) => {
+  const input = req.body.filter;
+  if (input == 1) {
+    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance FROM Users ORDER BY CurrencyBalance DESC LIMIT 10;';
+    db.any(query)
+    .then((data) => {
+      console.log(data);
+      res.render("pages/leaderboard", {
+        FILTER: req.body.filter,
+        data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("pages/main", {
+        error: true,
+        message: "Data is retrieved incorrectly",
+      });
+    });  
+  } else {
+    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins FROM Users ORDER BY TotalWins DESC LIMIT 10;';
+    db.any(query)
+  
+    .then((data) => {
+      console.log(data);
+      res.render("pages/leaderboard", {
+        FILTER: req.body.filter,
+        data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("pages/main", {
+        error: true,
+        message: "Data is retrieved incorrectly",
+      });
+    }); 
+  }
 });
 
 //Get Request for Game
