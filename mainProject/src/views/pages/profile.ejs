@@ -10,12 +10,12 @@
                 <center>
                     <% if (locals.Username == locals.Player1) { %>
                         <form action="/changeUrl" method="GET">
-                            <button class="btn btn-secondary" type = "submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
+                            <button class="btn btn-secondary" type = "submit"><img src=<%= ImageURL %>
                                 alt="Snorlax" height="200" width="200" /></button>
                         </form>
                     <% } else { %>
                         <form action="/changeUrl2" method="GET">
-                            <button class="btn btn-secondary" type = "submit"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU"
+                            <button class="btn btn-secondary" type = "submit"><img src=<%= ImageURL %>
                                 alt="Snorlax" height="200" width="200" /></button>
                         </form>
                     <% } %>

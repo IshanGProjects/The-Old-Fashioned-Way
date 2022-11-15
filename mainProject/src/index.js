@@ -29,6 +29,7 @@ const user = {
   CurrencyBalance: undefined,
   TotalWins: undefined,
   TotalLosses: undefined,
+  ImageURL: undefined
 };
 
 const user2 = {
@@ -38,6 +39,7 @@ const user2 = {
   CurrencyBalance: undefined,
   TotalWins: undefined,
   TotalLosses: undefined,
+  ImageURL: undefined
 }
 
 //DATABASE CONFIGURATION FOR LOCAL ENVIROMENT
@@ -170,6 +172,7 @@ app.get('/profile', auth, (req, res) => {
     CurrencyBalance: req.session.user.CurrencyBalance,
     TotalWins: req.session.user.TotalWins,
     TotalLosses: req.session.user.TotalLosses,
+    ImageURL: req.session.user.ImageURL,
     
   });
 });
@@ -183,6 +186,7 @@ app.get('/profileUser2', auth, (req, res) => {
     CurrencyBalance: req.session.user2.CurrencyBalance,
     TotalWins: req.session.user2.TotalWins,
     TotalLosses: req.session.user2.TotalLosses,
+    ImageURL: req.session.user2.ImageURL,
   });
 });
 
@@ -313,6 +317,7 @@ app.post('/edit_name', auth, (req, res) => {
           CurrencyBalance: req.session.user.CurrencyBalance,
           TotalWins: req.session.user.TotalWins,
           TotalLosses: req.session.user.TotalLosses,
+          ImageURL: req.session.user.ImageURL,
         });
         console.log(err);
       });
@@ -347,6 +352,7 @@ app.post('/edit_name2', auth, (req, res) => {
           CurrencyBalance: req.session.user2.CurrencyBalance,
           TotalWins: req.session.user2.TotalWins,
           TotalLosses: req.session.user2.TotalLosses,
+          ImageURL: req.session.user2.ImageURL,
         });
         console.log(err);
       });
@@ -380,7 +386,7 @@ app.post('/register', async (req, res) => {
       message: "Please type in a password to create an account.",
     });
   } else {
-    query = `INSERT INTO Users (Email, Username, Country, Password, CurrencyBalance, TotalWins, TotalLosses) VALUES ('${email}', '${username}', '${country}', '${hash}', 100, 0, 0);`;
+    query = `INSERT INTO Users (Email, Username, Country, Password, CurrencyBalance, TotalWins, TotalLosses, ImageUrl) VALUES ('${email}', '${username}', '${country}', '${hash}', 100, 0, 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU');`;
 
     db.any(query)
       .then(function () {
@@ -436,7 +442,7 @@ app.post("/login", (req, res) => {
         user.CurrencyBalance = data.currencybalance;
         user.TotalWins = data.totalwins;
         user.TotalLosses = data.totallosses;
-        
+        user.ImageURL = data.imageurl
         req.session.user = user;
         req.session.save();
 
@@ -502,7 +508,7 @@ app.post("/loginUser2", (req, res) => {
         user2.CurrencyBalance = data2.currencybalance;
         user2.TotalWins = data2.totalwins;
         user2.TotalLosses = data2.totallosses;
-        
+        user2.ImageURL = data2.imageurl
         req.session.user2 = user2;
         req.session.save();
 
