@@ -8,8 +8,8 @@
         <button type="submit" style="position: absolute; top: 20px; right: 20px;max-width:fit-content;" class="nes-btn is-error">LOGOUT</button>
     </form>
     <!-- Leaderboard Button -->
-    <form action="/main_lb" method="GET">
-        <button type="submit" style="position: absolute; top: 20px; left: 20px;max-width:fit-content;" class="nes-btn is-normal">LeaderBoard</button>
+    <form action="/leaderboard" method="POST">
+        <button type="submit" style="position: absolute; top: 20px; left: 20px;max-width:fit-content;" class="nes-btn is-normal">LEADERBOARD</button>
     </form>
     <!-- Background -->
     <div class="container-fluid" style="padding-top: 100px;">
@@ -40,8 +40,6 @@
                 </div>
             <% } %>    
     </div>
-
-
 </main>
 
 <%- include ('../partials/footer') %>
