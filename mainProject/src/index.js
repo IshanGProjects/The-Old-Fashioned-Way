@@ -74,15 +74,6 @@ db.connect()
 
 
 
-   // Authentication Middleware.
-   const auth = (req, res, next) => {
-    if (!req.session.user) {
-      // Default to register page.
-      res.redirect('/home');
-    }
-    next();
-  };
-
 
 //**this get redirects the main page to the register page for the purposes of testing the register page
 app.get('/', (req, res) => {
@@ -115,6 +106,15 @@ app.get('/loginUser2', (req, res) => {
 app.get('/registerUser2', (req, res) => {
   res.render('pages/registerUser2');
 })
+
+   // Authentication Middleware.
+   const auth = (req, res, next) => {
+    if (!req.session.user) {
+      // Default to register page.
+      return res.redirect('/home');
+    }
+    next();
+  };
 
 app.get('/placeBet', auth, (req, res) => {
     res.render('pages/placeBet',{
@@ -654,7 +654,7 @@ app.post("/placeBet", auth, (req, res) =>{
 
   }
 
-  if(Number(wager) < 0 ){
+  else if(Number(wager) < 0 ){
     res.render("pages/placeBet", {
       Username: req.session.user.Username,
       Email: req.session.user.Email,
