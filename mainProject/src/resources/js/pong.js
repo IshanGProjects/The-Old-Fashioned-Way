@@ -106,9 +106,23 @@ Pong = {
   //This is the location where I will write my game winning logic
   goal: function(playerNo) {
     this.sounds.goal();
-    this.scores[playerNo] += 1;
+    this.scores[playerNo] += 9;
     if (this.scores[playerNo] == 9) {
       this.menu.declareWinner(playerNo);
+      console.log(playerNo)
+      //I need to write an AJAX API request to send the playerNo from the client side JS to the nodeJS index file
+    //   $.ajax({
+    //     url: '/checkWinner',
+    //     type: 'PUT',
+    //     dataType: 'int',
+    //     data: playerNo,
+    //     success: function (data, textStatus, xhr) {
+    //         console.log(data);
+    //     },
+    //     error: function (xhr, textStatus, errorThrown) {
+    //         console.log('Error in Operation');
+    //     }
+    // });    
       console.log("WIN WIN")
       this.stop();
     }

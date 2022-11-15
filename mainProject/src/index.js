@@ -629,12 +629,16 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 
   }
 
+});
 
-
-
-
+// Recieving and testing to see if i have that value for the win
+app.post("/checkWinner", auth, async(req, res) =>{
+  //Update the database balance
+  //Update victor
+  //Update wins/losses
+   
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
 app.listen(3000);
-console.log('Server is listening on port 3000');
+console.log('Server is listening on port 3000')
