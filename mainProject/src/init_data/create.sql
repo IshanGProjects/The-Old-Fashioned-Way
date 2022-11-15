@@ -7,7 +7,8 @@ CREATE TABLE Users(
     Country VARCHAR(100) NOT NULL,
     CurrencyBalance FLOAT NOT NULL,
     TotalWins INT NOT NULL,
-    TotalLosses INT NOT NULL
+    TotalLosses INT NOT NULL,
+    ImageUrl VARCHAR(512)
 );
 
 -- CREATION FOR THE Matches TABLE
