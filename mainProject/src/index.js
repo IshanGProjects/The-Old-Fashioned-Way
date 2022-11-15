@@ -199,6 +199,8 @@ app.get('/edit_name', auth, (req, res) => {
     CurrencyBalance: req.session.user.CurrencyBalance,
     TotalWins: req.session.user.TotalWins,
     TotalLosses: req.session.user.TotalLosses,
+    ImageURL: req.session.user.ImageURL,
+    
   });
 });
 
@@ -211,6 +213,7 @@ app.get('/edit_name2', auth, (req, res) => {
     CurrencyBalance: req.session.user2.CurrencyBalance,
     TotalWins: req.session.user2.TotalWins,
     TotalLosses: req.session.user2.TotalLosses,
+    ImageURL: req.session.user2.ImageURL,
   });
 });
 
