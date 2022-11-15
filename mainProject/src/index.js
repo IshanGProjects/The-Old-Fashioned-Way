@@ -209,6 +209,47 @@ app.get('/edit_name2', auth, (req, res) => {
   });
 });
 
+// LeaderBoard Get 
+app.post('/leaderboard', async (req, res) => {
+  const input = req.body.filter;
+  if (input == 1) {
+    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance FROM Users ORDER BY CurrencyBalance DESC LIMIT 10;';
+    db.any(query)
+    .then((data) => {
+      console.log(data);
+      res.render("pages/leaderboard", {
+        FILTER: req.body.filter,
+        data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("pages/main", {
+        error: true,
+        message: "Data is retrieved incorrectly",
+      });
+    });  
+  } else {
+    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins FROM Users ORDER BY TotalWins DESC LIMIT 10;';
+    db.any(query)
+  
+    .then((data) => {
+      console.log(data);
+      res.render("pages/leaderboard", {
+        FILTER: req.body.filter,
+        data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("pages/main", {
+        error: true,
+        message: "Data is retrieved incorrectly",
+      });
+    }); 
+  }
+});
+
 //Get Request for Game
 app.get('/game', (req,res) =>{
   res.render('gameData/jsPong/index');
@@ -217,6 +258,8 @@ app.get('/game', (req,res) =>{
 app.get('"/betConfirm"', auth, (req,res) =>{
   res.render('/pages/betConfirm')
 });
+
+
 
 app.post('/edit_name', auth, (req, res) => {
   const newUsername = req.body.username;
@@ -461,6 +504,9 @@ app.post("/loginUser2", (req, res) => {
   }
 });
 
+
+
+// PlaceBet Post 
 app.post("/placeBet", auth, (req, res) =>{
   //console.log(req.body.p2Bf);
   //console.log(req.body.p1Bf);
