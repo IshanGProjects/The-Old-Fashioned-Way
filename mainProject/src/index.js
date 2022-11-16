@@ -24,26 +24,6 @@ app.use(
   })
 );
 
-const user = {
-  Username: undefined,
-  Email: undefined,
-  Country: undefined,
-  CurrencyBalance: undefined,
-  TotalWins: undefined,
-  TotalLosses: undefined,
-  ImageURL: undefined
-};
-
-const user2 = {
-  Username: undefined,
-  Email: undefined,
-  Country: undefined,
-  CurrencyBalance: undefined,
-  TotalWins: undefined,
-  TotalLosses: undefined,
-  ImageURL: undefined
-}
-
 //DATABASE CONFIGURATION FOR LOCAL ENVIROMENT
 const pgp = require('pg-promise')();
 require('dotenv').config();
@@ -528,14 +508,13 @@ app.post("/login", (req, res) => {
 
       if(match == true){
         console.log(data);
-        user.Username = data.username;
-        user.Email = data.email;
-        user.Country = data.country;
-        user.CurrencyBalance = data.currencybalance;
-        user.TotalWins = data.totalwins;
-        user.TotalLosses = data.totallosses;
-        user.ImageURL = data.imageurl
-        req.session.user = user;
+        req.session.user.Username = data.username;
+        req.session.user.Email = data.email;
+        req.session.user.Country = data.country;
+        req.session.user.CurrencyBalance = data.currencybalance;
+        req.session.user.TotalWins = data.totalwins;
+        req.session.user.TotalLosses = data.totallosses;
+        req.session.user.ImageURL = data.imageurl;
         req.session.save();
 
         res.redirect("/main");
@@ -594,14 +573,13 @@ app.post("/loginUser2", (req, res) => {
 
       if(match == true){
         console.log(data2);
-        user2.Username = data2.username;
-        user2.Email = data2.email;
-        user2.Country = data2.country;
-        user2.CurrencyBalance = data2.currencybalance;
-        user2.TotalWins = data2.totalwins;
-        user2.TotalLosses = data2.totallosses;
-        user2.ImageURL = data2.imageurl
-        req.session.user2 = user2;
+        req.session.user2.Username = data2.username;
+        req.session.user2.Email = data2.email;
+        req.session.user2.Country = data2.country;
+        req.session.user2.CurrencyBalance = data2.currencybalance;
+        req.session.user2.TotalWins = data2.totalwins;
+        req.session.user2.TotalLosses = data2.totallosses;
+        req.session.user2.ImageURL = data2.imageurl;
         req.session.save();
 
         res.redirect("/main");
