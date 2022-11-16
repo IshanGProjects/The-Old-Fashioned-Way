@@ -6,6 +6,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
+
 //DEFINING THE EXPRESS APP
 const app = express();
 
@@ -820,12 +821,18 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 
   }
 
+});
 
-
-
-
+// Recieving and testing to see if i have that value for the win
+app.post("/checkWinner",  async(req, res) =>{
+  const {name} = req.body;
+  console.log("Check Winner is working")
+  //Update the database balance
+  //Update victor
+  //Update wins/losses
+   
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
 app.listen(3000);
-console.log('Server is listening on port 3000');
+console.log('Server is listening on port 3000')
