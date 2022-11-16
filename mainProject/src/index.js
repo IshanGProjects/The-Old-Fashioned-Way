@@ -6,6 +6,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
+
 //DEFINING THE EXPRESS APP
 const app = express();
 
@@ -632,7 +633,9 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 });
 
 // Recieving and testing to see if i have that value for the win
-app.post("/checkWinner", auth, async(req, res) =>{
+app.post("/checkWinner",  async(req, res) =>{
+  const {name} = req.body;
+  console.log("Check Winner is working")
   //Update the database balance
   //Update victor
   //Update wins/losses

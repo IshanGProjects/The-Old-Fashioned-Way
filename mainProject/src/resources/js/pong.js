@@ -1,7 +1,7 @@
 //=============================================================================
 // PONG
 //=============================================================================
-
+// import axios from 'axios';  
 Pong = {
 
   Defaults: {
@@ -111,18 +111,7 @@ Pong = {
       this.menu.declareWinner(playerNo);
       console.log(playerNo)
       //I need to write an AJAX API request to send the playerNo from the client side JS to the nodeJS index file
-    //   $.ajax({
-    //     url: '/checkWinner',
-    //     type: 'PUT',
-    //     dataType: 'int',
-    //     data: playerNo,
-    //     success: function (data, textStatus, xhr) {
-    //         console.log(data);
-    //     },
-    //     error: function (xhr, textStatus, errorThrown) {
-    //         console.log('Error in Operation');
-    //     }
-    // });    
+      axios.post("http://localhost:3000/checkWinner", {name: "ishan"})
       console.log("WIN WIN")
       this.stop();
     }
