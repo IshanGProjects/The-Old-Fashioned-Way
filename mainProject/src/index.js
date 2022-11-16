@@ -15,6 +15,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'resources')));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, "/views"))
 // app.set('views', __dirname + '/views')
 app.use(bodyParser.json());
 app.use(
@@ -93,6 +94,7 @@ app.get('/login', (req, res) => {
 app.get('/logout', (req, res) => {
   req.session.user = false;
   req.session.user2 = false;
+  req.session.destroy();
   res.redirect('/home');
 });
 
@@ -136,7 +138,7 @@ app.get('/placeBet', auth, (req, res) => {
 });
 
 app.get('/main', auth, (req, res) => {
-  if(user2.Username == undefined) {
+  if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -480,7 +482,7 @@ app.post('/register', async (req, res) => {
 
     db.any(query)
       .then(function () {
-        if(user.Username == undefined) {
+        if(req.session.user == undefined || req.session.user.Username == undefined) {
           res.redirect('/home');
         } else {
           res.redirect('/main');
