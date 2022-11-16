@@ -767,6 +767,9 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
   MatchTablequery = `INSERT INTO Matches(MatchCaption,Victor,Wager) VALUES ('${req.body.matchCaption}', 'NoOne', '${wagerPlace }');`;
   UpdateUser1Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user.Username}'`;
   UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username}'`;
+
+  Add_Match_To_User_Table_Query = `INSERT INTO Users_To_Matches(Username,MatchID) VALUES ('${req.session.user.Username}', (SELECT MAX(MatchID) FROM Matches))`;
+  Add_Match_To_User2_Table_Query = `INSERT INTO Users_To_Matches(Username,MatchID) VALUES ('${req.session.user2.Username}', (SELECT MAX(MatchID) FROM Matches))`;
   //query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user.Username}'`
   //query = `INSERT INTO Users (Email, Username, Country, Password, CurrencyBalance, TotalWins, TotalLosses) VALUES ('${email}', '${username}', '${country}', '${hash}', 100, 0, 0);`;
 
@@ -797,7 +800,10 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
     await db.query(UpdateUser1Query);
     await db.query(UpdateUser2Query);
 
-    db.any(MatchTablequery)
+    await db.query(MatchTablequery);
+    await db.query(Add_Match_To_User_Table_Query);
+
+    db.any(Add_Match_To_User2_Table_Query)
       .then(function () {
         res.redirect('/game');
       })
