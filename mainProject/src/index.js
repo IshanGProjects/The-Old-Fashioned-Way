@@ -825,11 +825,65 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 
 // Recieving and testing to see if i have that value for the win
 app.post("/checkWinner",  async(req, res) =>{
-  const {name} = req.body;
-  console.log("Check Winner is working")
-  //Update the database balance
-  //Update victor
-  //Update wins/losses
+  const {winner} = req.body;
+  // console.log(winner)
+  // console.log(req.session.user.Username);
+  // console.log(req.session.user2.Username);
+
+  // MatchTablequery = `INSERT INTO Matches(MatchCaption,Victor,Wager) VALUES ('${req.body.matchCaption}', 'NoOne', '${wagerPlace }');`;
+  // UpdateUser1Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user.Username};'`;
+  // UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username};'`;
+
+  if(winner == 0){
+    //Setting Current Balance if player1 wins
+    updateUser1Curr = `
+    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager} 
+    WHERE currencyBalance = 
+    (SELECT currencyBalance 
+    FROM USERS 
+    INNER JOIN Users_To_Matches ON Users_To_Matches.Username = USERS.username
+    WHERE Users_to_Matches.MatchID = (SELECT MAX(MatchID) FROM Matches) AND Users_To_Matches.username = '${req.session.user.Username}');`
+    //Setting the Victor of the Match
+    setVictor1 = `
+    UPDATE Matches SET victor = '${req.session.user.Username}'
+    WHERE MatchID = (Select MAX(MatchID) 
+    FROM Users_To_Matches);`
+    //Update wins for player 1 and losses for player 2
+    updateStats1 = `
+    UPDATE Users SET TotalWins = TotalWins + 1
+    WHERE Username = '${req.session.user.Username}';
+
+    UPDATE Users SET TotalLosses = TotalLosses + 1 
+    WHERE Username = '${req.session.user2.Username2}';
+    `
+
+  }
+
+  else if(winner = 1){
+    //Setting Current Balance if player2 wins
+    updateUser1Curr = `
+    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager} 
+    WHERE currencyBalance = 
+    (SELECT currencyBalance 
+    FROM USERS 
+    INNER JOIN Users_To_Matches ON Users_To_Matches.Username = USERS.username
+    WHERE Users_to_Matches.MatchID = (SELECT MAX(MatchID) FROM Matches) AND Users_To_Matches.username = '${req.session.user2.Username2}');`
+    //Setting the Victor of the Match
+    setVictor2 = `
+    UPDATE Matches SET victor = '${req.session.user2.Username2}'
+    WHERE MatchID = (Select MAX(MatchID) 
+    FROM Users_To_Matches);`
+    //Update wins for player 2 and losses for player 1
+    updateStats2 = `
+    UPDATE Users SET TotalWins = TotalWins + 1
+    WHERE Username = '${req.session.user2.Username2}';
+
+    UPDATE Users SET TotalLosses = TotalLosses + 1 
+    WHERE Username = '${req.session.user2.Username2}';
+    `
+   
+  }
+  
    
 });
 
