@@ -6,6 +6,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
+
 //DEFINING THE EXPRESS APP
 const app = express();
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'resources')));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, "/views"))
 // app.set('views', __dirname + '/views')
 app.use(bodyParser.json());
 app.use(
@@ -92,6 +94,7 @@ app.get('/login', (req, res) => {
 app.get('/logout', (req, res) => {
   req.session.user = false;
   req.session.user2 = false;
+  req.session.destroy();
   res.redirect('/home');
 });
 
@@ -135,7 +138,7 @@ app.get('/placeBet', auth, (req, res) => {
 });
 
 app.get('/main', auth, (req, res) => {
-  if(user2.Username == undefined) {
+  if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -479,7 +482,7 @@ app.post('/register', async (req, res) => {
 
     db.any(query)
       .then(function () {
-        if(user.Username == undefined) {
+        if(req.session.user == undefined || req.session.user.Username == undefined) {
           res.redirect('/home');
         } else {
           res.redirect('/main');
@@ -820,12 +823,18 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 
   }
 
+});
 
-
-
-
+// Recieving and testing to see if i have that value for the win
+app.post("/checkWinner",  async(req, res) =>{
+  const {name} = req.body;
+  console.log("Check Winner is working")
+  //Update the database balance
+  //Update victor
+  //Update wins/losses
+   
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
 app.listen(3000);
-console.log('Server is listening on port 3000');
+console.log('Server is listening on port 3000')
