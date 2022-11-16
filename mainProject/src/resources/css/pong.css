@@ -1,4 +1,4 @@
-body { background-color: rgb(255, 254, 254); color: #AAA; font-size: 12pt; padding: 1em; }
+body { background: url(/images/pongpaddle.png); color: rgb(253, 246, 246); font-size: 12pt; padding: 1em; }
 
 #unsupported { border: 1px solid yellow; color: black; background-color: #FFFFAD; padding: 2em; margin: 1em; display: inline-block; }
 
