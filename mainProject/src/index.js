@@ -10,8 +10,6 @@ const axios = require('axios');
 //DEFINING THE EXPRESS APP
 const app = express();
 
-
-
 app.use(express.static(path.join(__dirname, 'resources')));
 //USING bodyParser TO PARSE JSON IN THE REQUEST BODY INTO JS ONJECTS
 app.set('view engine', 'ejs');
@@ -23,7 +21,7 @@ app.use(
     extended: true,
   })
 );
-
+//Create a const user that will store our user 1 variables
 const user = {
   Username: undefined,
   Email: undefined,
@@ -33,7 +31,7 @@ const user = {
   TotalLosses: undefined,
   ImageURL: undefined
 };
-
+//Create a const user2 that will store our user 2 variables
 const user2 = {
   Username: undefined,
   Email: undefined,
@@ -86,39 +84,39 @@ app.get('/', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('pages/register');
 });
-
+//GET Login Page
 app.get('/login', (req, res) => {
   res.render('pages/login');
 });
-
+//GET Logout should destory sesion and restart out user values
 app.get('/logout', (req, res) => {
   req.session.user = false;
   req.session.user2 = false;
   req.session.destroy();
   res.redirect('/home');
 });
-
+//GET Home Page
 app.get('/home', (req, res) => {
   res.render('pages/home');
 });
-
+//GET Login User 2 page
 app.get('/loginUser2', (req, res) => {
   res.render('pages/loginUser2');
 })
-
+//GET Register User 2 Page
 app.get('/registerUser2', (req, res) => {
   res.render('pages/registerUser2');
 })
 
-   // Authentication Middleware.
-   const auth = (req, res, next) => {
-    if (!req.session.user) {
-      // Default to register page.
-      return res.redirect('/home');
-    }
+// Authentication Middleware.
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    // Default to register page.
+    return res.redirect('/home');
+  }
     next();
   };
-
+//GET Place Bet Page
 app.get('/placeBet', auth, (req, res) => {
     res.render('pages/placeBet',{
       Username: req.session.user.Username,
@@ -136,7 +134,7 @@ app.get('/placeBet', auth, (req, res) => {
       TotalLosses2: req.session.user2.TotalLosses,
     });
 });
-
+//GET Main Page
 app.get('/main', auth, (req, res) => {
   if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
     res.render('pages/main',{
@@ -165,7 +163,7 @@ app.get('/main', auth, (req, res) => {
     });
   }
 });
-
+//GET Profile Page
 app.get('/profile', auth, (req, res) => {
   res.render('pages/profile', {
     Player1: req.session.user.Username,
@@ -179,7 +177,7 @@ app.get('/profile', auth, (req, res) => {
     
   });
 });
-
+//GET User 2 Profile Page
 app.get('/profileUser2', auth, (req, res) => {
   res.render('pages/profile', {
     Player1: req.session.user.Username,
@@ -192,7 +190,7 @@ app.get('/profileUser2', auth, (req, res) => {
     ImageURL: req.session.user2.ImageURL,
   });
 });
-
+//GET Edit Name Page
 app.get('/edit_name', auth, (req, res) => {
   res.render('pages/edit_name', {
     Player1: req.session.user.Username,
@@ -206,7 +204,7 @@ app.get('/edit_name', auth, (req, res) => {
     
   });
 });
-
+//GET Edit User 2 Page
 app.get('/edit_name2', auth, (req, res) => {
   res.render('pages/edit_name', {
     Player1: req.session.user.Username,
@@ -219,8 +217,42 @@ app.get('/edit_name2', auth, (req, res) => {
     ImageURL: req.session.user2.ImageURL,
   });
 });
+//Get Request for Game
+app.get('/game', auth, (req,res) =>{
+  res.render('gameData/jsPong/index');
+});
+//GET Bet confirm Page
+app.get("/betConfirm", auth, (req,res) =>{
+  res.render('/pages/betConfirm');
+});
+//GET Change Profile Image Page for User 1
+app.get("/changeUrl", auth, (req,res) =>{
+  res.render('pages/editProfileUrl',{
+    Player1: req.session.user.Username,
+    Username: req.session.user.Username,
+    Email: req.session.user.Email,
+    Country: req.session.user.Country,
+    CurrencyBalance: req.session.user.CurrencyBalance,
+    TotalWins: req.session.user.TotalWins,
+    TotalLosses: req.session.user.TotalLosses,
+    ImageURL: req.session.user.ImageURL,
+  });
+});
+//GET Change Profile Image for User 2
+app.get("/changeUrl2", auth, (req,res) =>{
+  res.render('pages/editProfileUrl',{
+    Player1: req.session.user.Username,
+    Username: req.session.user2.Username,
+    Email: req.session.user2.Email,
+    Country: req.session.user2.Country,
+    CurrencyBalance: req.session.user2.CurrencyBalance,
+    TotalWins: req.session.user2.TotalWins,
+    TotalLosses: req.session.user2.TotalLosses,
+    ImageURL: req.session.user2.ImageURL,
+  });
+});
 
-// LeaderBoard Get 
+//POST LeaderBoard Page
 app.post('/leaderboard', auth, async (req, res) => {
   const input = req.body.filter;
   if (input == 1) {
@@ -261,41 +293,7 @@ app.post('/leaderboard', auth, async (req, res) => {
   }
 });
 
-//Get Request for Game
-app.get('/game', auth, (req,res) =>{
-  res.render('gameData/jsPong/index');
-});
-
-app.get("/betConfirm", auth, (req,res) =>{
-  res.render('/pages/betConfirm');
-});
-
-app.get("/changeUrl", auth, (req,res) =>{
-  res.render('pages/editProfileUrl',{
-    Player1: req.session.user.Username,
-    Username: req.session.user.Username,
-    Email: req.session.user.Email,
-    Country: req.session.user.Country,
-    CurrencyBalance: req.session.user.CurrencyBalance,
-    TotalWins: req.session.user.TotalWins,
-    TotalLosses: req.session.user.TotalLosses,
-    ImageURL: req.session.user.ImageURL,
-  });
-});
-
-app.get("/changeUrl2", auth, (req,res) =>{
-  res.render('pages/editProfileUrl',{
-    Player1: req.session.user.Username,
-    Username: req.session.user2.Username,
-    Email: req.session.user2.Email,
-    Country: req.session.user2.Country,
-    CurrencyBalance: req.session.user2.CurrencyBalance,
-    TotalWins: req.session.user2.TotalWins,
-    TotalLosses: req.session.user2.TotalLosses,
-    ImageURL: req.session.user2.ImageURL,
-  });
-});
-
+//POST Edit Profile Name For User 2 Page
 app.post('/edit_name', auth, (req, res) => {
   const newUsername = req.body.username;
   query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user.Username}'`
@@ -331,7 +329,7 @@ app.post('/edit_name', auth, (req, res) => {
         console.log(err);
       });
 });
-
+//POST Edit Name For User 2 Page
 app.post('/edit_name2', auth, (req, res) => {
   const newUsername = req.body.username;
   query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user2.Username}'`
@@ -367,7 +365,7 @@ app.post('/edit_name2', auth, (req, res) => {
         console.log(err);
       });
 });
-
+//POST edit profile image for User 1
 app.post('/editImageProfile1',auth, (req, res) => {
   const newImageURL = req.body.imageURL;
 
@@ -408,7 +406,7 @@ app.post('/editImageProfile1',auth, (req, res) => {
   });
 
 });
-
+//Post Edit Image For Profile 2:
 app.post('/editImageProfile2',auth, (req, res) => {
   const newImageURL = req.body.imageURL;
 
@@ -449,7 +447,7 @@ app.post('/editImageProfile2',auth, (req, res) => {
   });
 
 });
-
+//POST Register User In Database
 app.post('/register', async (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
@@ -497,7 +495,7 @@ app.post('/register', async (req, res) => {
       });
   }
 });
-
+//POST Login
 app.post("/login", (req, res) => {
   
   const query = `SELECT * FROM Users WHERE Users.Username = '${req.body.username}'`;
@@ -558,7 +556,7 @@ app.post("/login", (req, res) => {
     });
   }
 });
-
+//POST Loginin User 2
 app.post("/loginUser2", (req, res) => {
   const query = `SELECT * FROM Users WHERE Users.Username = '${req.body.username}'`;
   
@@ -627,11 +625,8 @@ app.post("/loginUser2", (req, res) => {
 
 
 
-// PlaceBet Post 
+//POST PlaceBet checks to see if its a valid bet
 app.post("/placeBet", auth, (req, res) =>{
-  //console.log(req.body.p2Bf);
-  //console.log(req.body.p1Bf);
-
   player1Balance = req.body.p1Bf;
   player2Balance = req.body.p2Bf;
 
@@ -652,7 +647,7 @@ app.post("/placeBet", auth, (req, res) =>{
       TotalWins2: req.session.user2.TotalWins,
       TotalLosses2: req.session.user2.TotalLosses,
       error: true,
-      message: "Please type in a bet.",
+      message: "Please type in a bet that isn't 0.",
     });
 
   }
@@ -763,7 +758,7 @@ app.post("/placeBet", auth, (req, res) =>{
 
 
 });
-
+//POST Confirm Bet, take the bet and updates database
 app.post("/confirmPlaceBet", auth, async(req, res) =>{
   wagerPlace = wager *2;
   
