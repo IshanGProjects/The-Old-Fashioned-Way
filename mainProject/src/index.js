@@ -255,43 +255,84 @@ app.get("/changeUrl2", auth, (req,res) =>{
 //POST LeaderBoard Page
 app.post('/leaderboard', auth, async (req, res) => {
   const input = req.body.filter;
-  if (input == 1) {
-    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance, ImageUrl FROM Users ORDER BY CurrencyBalance DESC;';
-    db.any(query)
-    .then((data) => {
-      console.log(data);
-      res.render("pages/leaderboard", {
-        FILTER: req.body.filter,
-        user1: req.session.user.Username,
-        data,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.render("pages/main", {
-        error: true,
-        message: "Data is retrieved incorrectly",
-      });
-    });  
+  if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
+    if (input == 1) {
+      const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance, ImageUrl FROM Users ORDER BY CurrencyBalance DESC;';
+      db.any(query)
+      .then((data) => {
+        console.log(data);
+        res.render("pages/leaderboard", {
+          FILTER: req.body.filter,
+          user1: req.session.user.Username,
+          data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.render("pages/main", {
+          error: true,
+          message: "Data is retrieved incorrectly",
+        });
+      });  
+    } else {
+      const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins, ImageUrl FROM Users ORDER BY TotalWins DESC;';
+      db.any(query)
+      .then((data) => {
+        console.log(data);
+        res.render("pages/leaderboard", {
+          FILTER: req.body.filter,
+          user1: req.session.user.Username,
+          data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.render("pages/main", {
+          error: true,
+          message: "Data is retrieved incorrectly",
+        });
+      }); 
+    }
   } else {
-    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins, ImageUrl FROM Users ORDER BY TotalWins DESC;';
-    db.any(query)
-  
-    .then((data) => {
-      console.log(data);
-      res.render("pages/leaderboard", {
-        FILTER: req.body.filter,
-        user1: req.session.user.Username,
-        data,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.render("pages/main", {
-        error: true,
-        message: "Data is retrieved incorrectly",
-      });
-    }); 
+    if (input == 1) {
+      const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance, ImageUrl FROM Users ORDER BY CurrencyBalance DESC;';
+      db.any(query)
+      .then((data) => {
+        console.log(data);
+        res.render("pages/leaderboard", {
+          FILTER: req.body.filter,
+          user1: req.session.user.Username,
+          user2: req.session.user2.Username,
+          data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.render("pages/main", {
+          error: true,
+          message: "Data is retrieved incorrectly",
+        });
+      });  
+    } else {
+      const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins, ImageUrl FROM Users ORDER BY TotalWins DESC;';
+      db.any(query)
+      .then((data) => {
+        console.log(data);
+        res.render("pages/leaderboard", {
+          FILTER: req.body.filter,
+          user1: req.session.user.Username,
+          user2: req.session.user2.Username,
+          data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.render("pages/main", {
+          error: true,
+          message: "Data is retrieved incorrectly",
+        });
+      }); 
+    }
   }
 });
 
