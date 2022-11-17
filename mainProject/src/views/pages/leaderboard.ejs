@@ -46,6 +46,8 @@
                             <% data.forEach(function(lb){ %>
                                 <% if(lb.username == user1) { %>
                                     <tr style="color: #f6c244;">
+                                <% } else if (locals.user2 && lb.username == user2) { %>
+                                    <tr style="color: #eae554;">
                                 <% } else { %>
                                     <tr>
                                 <% } %>
@@ -68,6 +70,8 @@
                             <% data.forEach(function(lb){ %>
                                 <% if(lb.username == user1) { %>
                                     <tr style="color: #f6c244;">
+                                <% } else if (locals.user2 && lb.username == user2) { %>
+                                    <tr style="color: #eae554;">
                                 <% } else { %>
                                     <tr>
                                 <% } %>
