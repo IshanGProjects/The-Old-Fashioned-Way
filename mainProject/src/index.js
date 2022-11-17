@@ -136,7 +136,9 @@ app.get('/placeBet', auth, (req, res) => {
 });
 //GET Main Page
 app.get('/main', auth, (req, res) => {
-  if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
+  console.log("test3")
+  if(user2.Username == undefined) {
+    console.log("test4")
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -146,6 +148,7 @@ app.get('/main', auth, (req, res) => {
       TotalLosses: req.session.user.TotalLosses,
     });
   } else {
+    console.log("test5")
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -221,7 +224,12 @@ app.get('/edit_name2', auth, (req, res) => {
 app.get('/game', auth, (req,res) =>{
   res.render('gameData/jsPong/index');
 });
-//GET Bet confirm Page
+
+//Winner EJS PAGE
+app.get('/winner', auth, (req,res) =>{
+  res.render('pages/winner');
+});
+
 app.get("/betConfirm", auth, (req,res) =>{
   res.render('/pages/betConfirm');
 });
@@ -737,6 +745,7 @@ app.post("/placeBet", auth, (req, res) =>{
   }
   else if(player2Balance < 0){
     res.render("pages/placeBet", {
+      // user: req.session.user,
       Username: req.session.user.Username,
       Email: req.session.user.Email,
       Country: req.session.user.Country,
@@ -863,14 +872,81 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 
 });
 
+
 // Recieving and testing to see if i have that value for the win
 app.post("/checkWinner",  async(req, res) =>{
-  const {name} = req.body;
-  console.log("Check Winner is working")
-  //Update the database balance
-  //Update victor
-  //Update wins/losses
+  const {winner} = req.body;
+  console.log(winner);
+  // console.log(winner)
+  // console.log(req.session.user.Username);
+  // console.log(req.session.user2.Username);
+
+  // MatchTablequery = `INSERT INTO Matches(MatchCaption,Victor,Wager) VALUES ('${req.body.matchCaption}', 'NoOne', '${wagerPlace }');`;
+  // UpdateUser1Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user.Username};'`;
+  // UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username};'`;
+
+  if(winner == 0){
    
+    //Setting Current Balance if player1 wins
+    updateUserCurr = `
+    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager * 2} 
+    WHERE USERS.username = '${req.session.user.Username}';`
+    //Setting the Victor of the Match
+    setVictor = `
+    UPDATE Matches SET victor = '${req.session.user.Username}'
+    WHERE MatchID = (Select MAX(MatchID) 
+    FROM Users_To_Matches);`
+    //Update wins for player 1 and losses for player 2
+    updateStats = `
+    UPDATE Users SET TotalWins = TotalWins + 1
+    WHERE Username = '${req.session.user.Username}';`
+
+    updateStats2 = `UPDATE Users SET TotalLosses = TotalLosses + 1 
+    WHERE Username = '${req.session.user2.Username}';`
+
+
+    
+
+  }
+
+  else if(winner = 1){
+    //Setting Current Balance if player2 wins
+    updateUserCurr = ` 
+    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager * 2} 
+    WHERE USERS.username = '${req.session.user2.Username}';`
+    //Setting the Victor of the Match
+    setVictor = `
+    UPDATE Matches SET victor = '${req.session.user2.Username}'
+    WHERE MatchID = (Select MAX(MatchID) 
+    FROM Users_To_Matches);`
+    //Update wins for player 2 and losses for player 1
+    updateStats = `
+    UPDATE Users SET TotalWins = TotalWins + 1
+    WHERE Username = '${req.session.user2.Username}';`
+
+    updateStats2 = `UPDATE Users SET TotalLosses = TotalLosses + 1 
+    WHERE Username = '${req.session.user.Username}';`
+
+    
+  }
+
+  console.log("username2" + req.session.user2.Username)
+  console.log("username" + req.session.user.Username);
+  
+  await db.query(updateUserCurr);
+  await db.query(setVictor);
+  await db.query(updateStats);
+  // await db.query(updateStats2);
+
+  await db.any(updateStats2)
+    .then(function () {
+      res.status(200).send();
+      console.log("test1")
+    })
+    .catch(function (err) {
+      res.status(500).send();
+      console.log(err);
+    });
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
