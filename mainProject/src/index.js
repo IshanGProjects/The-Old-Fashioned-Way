@@ -22,6 +22,9 @@ app.use(
   })
 );
 //Create a const user that will store our user 1 variables
+const game = {
+  winner: undefined,
+}
 const user = {
   Username: undefined,
   Email: undefined,
@@ -88,6 +91,7 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('pages/login');
 });
+
 //GET Logout should destory sesion and restart out user values
 app.get('/logout', (req, res) => {
   req.session.user = false;
@@ -227,7 +231,15 @@ app.get('/game', auth, (req,res) =>{
 
 //Winner EJS PAGE
 app.get('/winner', auth, (req,res) =>{
-  res.render('pages/winner');
+  if(req.query.winner == 0){
+    res.render('pages/winner', {
+      username: req.session.user.Username,
+    });
+  } else {
+    res.render('pages/winner', {
+      username: req.session.user2.Username,
+    });
+  }
 });
 
 app.get("/betConfirm", auth, (req,res) =>{
@@ -875,6 +887,7 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 
 // Recieving and testing to see if i have that value for the win
 app.post("/checkWinner",  async(req, res) =>{
+
   const {winner} = req.body;
   console.log(winner);
   // console.log(winner)
@@ -885,7 +898,7 @@ app.post("/checkWinner",  async(req, res) =>{
   // UpdateUser1Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user.Username};'`;
   // UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username};'`;
 
-  if(winner == 0){
+  if(winner === 0){
    
     //Setting Current Balance if player1 wins
     updateUserCurr = `
@@ -909,7 +922,7 @@ app.post("/checkWinner",  async(req, res) =>{
 
   }
 
-  else if(winner = 1){
+  else if(winner === 1){
     //Setting Current Balance if player2 wins
     updateUserCurr = ` 
     UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager * 2} 
@@ -950,5 +963,10 @@ app.post("/checkWinner",  async(req, res) =>{
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
+app.get('/*', (req, res) => {
+  res.redirect('/main')
+});
+
+
 app.listen(3000);
 console.log('Server is listening on port 3000')
