@@ -256,12 +256,13 @@ app.get("/changeUrl2", auth, (req,res) =>{
 app.post('/leaderboard', auth, async (req, res) => {
   const input = req.body.filter;
   if (input == 1) {
-    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance, ImageUrl FROM Users ORDER BY CurrencyBalance DESC LIMIT 10;';
+    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance, ImageUrl FROM Users ORDER BY CurrencyBalance DESC;';
     db.any(query)
     .then((data) => {
       console.log(data);
       res.render("pages/leaderboard", {
         FILTER: req.body.filter,
+        user1: req.session.user.Username,
         data,
       });
     })
@@ -273,13 +274,14 @@ app.post('/leaderboard', auth, async (req, res) => {
       });
     });  
   } else {
-    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins, ImageUrl FROM Users ORDER BY TotalWins DESC LIMIT 10;';
+    const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins, ImageUrl FROM Users ORDER BY TotalWins DESC;';
     db.any(query)
   
     .then((data) => {
       console.log(data);
       res.render("pages/leaderboard", {
         FILTER: req.body.filter,
+        user1: req.session.user.Username,
         data,
       });
     })
