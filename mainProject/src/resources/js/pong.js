@@ -111,6 +111,7 @@ Pong = {
       this.menu.declareWinner(playerNo);
       console.log(playerNo)
       //I need to write an AJAX API request to send the playerNo from the client side JS to the nodeJS index file
+
       axios.post("/checkWinner", {winner: playerNo})
       .then(function(res){
         console.log('render test')
