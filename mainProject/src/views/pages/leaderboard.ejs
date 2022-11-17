@@ -44,10 +44,14 @@
                     <% if (FILTER == 1) { %>
                         <tbody>
                             <% data.forEach(function(lb){ %>
-                            <tr>
+                                <% if(lb.username == user1) { %>
+                                    <tr style="color: #f6c244;">
+                                <% } else { %>
+                                    <tr>
+                                <% } %>
                                 <td style="width: 8%;"><%=lb.row%>.</td>
                                 <td><img width = 30 height = 30 src="<%= lb.imageurl %>"></td>
-                                <td style="width: 78%">
+                                <td style="width: 78%;">
                                     <div>
                                         <%=lb.username%>
                                     </div>
@@ -62,10 +66,14 @@
                     <% } else { %>
                         <tbody>
                             <% data.forEach(function(lb){ %>
-                            <tr>
+                                <% if(lb.username == user1) { %>
+                                    <tr style="color: #f6c244;">
+                                <% } else { %>
+                                    <tr>
+                                <% } %>
                                 <td style="width: 8%;"><%=lb.row%>.</td>
                                 <td><img width = 30 height = 30 src="<%= lb.imageurl %>"></td>
-                                <td style="width: 78%">
+                                <td style="width: 78%;">
                                     <div>
                                         <%=lb.username%>
                                     </div>
