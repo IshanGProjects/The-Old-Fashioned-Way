@@ -647,7 +647,7 @@ app.post("/placeBet", auth, (req, res) =>{
       TotalWins2: req.session.user2.TotalWins,
       TotalLosses2: req.session.user2.TotalLosses,
       error: true,
-      message: "Please type in a bet.",
+      message: "Please type in a bet that isn't 0.",
     });
 
   }
