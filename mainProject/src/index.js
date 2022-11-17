@@ -136,7 +136,9 @@ app.get('/placeBet', auth, (req, res) => {
 });
 
 app.get('/main', auth, (req, res) => {
+  console.log("test3")
   if(user2.Username == undefined) {
+    console.log("test4")
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -146,6 +148,7 @@ app.get('/main', auth, (req, res) => {
       TotalLosses: req.session.user.TotalLosses,
     });
   } else {
+    console.log("test5")
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -262,6 +265,10 @@ app.post('/leaderboard', auth, async (req, res) => {
 //Get Request for Game
 app.get('/game', auth, (req,res) =>{
   res.render('gameData/jsPong/index');
+});
+//Winner EJS PAGE
+app.get('/winner', auth, (req,res) =>{
+  res.render('pages/winner');
 });
 
 app.get("/betConfirm", auth, (req,res) =>{
@@ -697,6 +704,7 @@ app.post("/placeBet", auth, (req, res) =>{
   }
   else if(player2Balance < 0){
     res.render("pages/placeBet", {
+      // user: req.session.user,
       Username: req.session.user.Username,
       Email: req.session.user.Email,
       Country: req.session.user.Country,
@@ -826,6 +834,7 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 // Recieving and testing to see if i have that value for the win
 app.post("/checkWinner",  async(req, res) =>{
   const {winner} = req.body;
+  console.log(winner);
   // console.log(winner)
   // console.log(req.session.user.Username);
   // console.log(req.session.user2.Username);
@@ -835,55 +844,67 @@ app.post("/checkWinner",  async(req, res) =>{
   // UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username};'`;
 
   if(winner == 0){
+   
     //Setting Current Balance if player1 wins
-    updateUser1Curr = `
-    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager} 
-    WHERE currencyBalance = 
-    (SELECT currencyBalance 
-    FROM USERS 
-    INNER JOIN Users_To_Matches ON Users_To_Matches.Username = USERS.username
-    WHERE Users_to_Matches.MatchID = (SELECT MAX(MatchID) FROM Matches) AND Users_To_Matches.username = '${req.session.user.Username}');`
+    updateUserCurr = `
+    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager * 2} 
+    WHERE USERS.username = '${req.session.user.Username}';`
     //Setting the Victor of the Match
-    setVictor1 = `
+    setVictor = `
     UPDATE Matches SET victor = '${req.session.user.Username}'
     WHERE MatchID = (Select MAX(MatchID) 
     FROM Users_To_Matches);`
     //Update wins for player 1 and losses for player 2
-    updateStats1 = `
+    updateStats = `
     UPDATE Users SET TotalWins = TotalWins + 1
-    WHERE Username = '${req.session.user.Username}';
+    WHERE Username = '${req.session.user.Username}';`
 
-    UPDATE Users SET TotalLosses = TotalLosses + 1 
-    WHERE Username = '${req.session.user2.Username2}';
-    `
+    updateStats2 = `UPDATE Users SET TotalLosses = TotalLosses + 1 
+    WHERE Username = '${req.session.user2.Username}';`
+
+
+    
 
   }
 
   else if(winner = 1){
     //Setting Current Balance if player2 wins
-    updateUser1Curr = `
-    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager} 
-    WHERE currencyBalance = 
-    (SELECT currencyBalance 
-    FROM USERS 
-    INNER JOIN Users_To_Matches ON Users_To_Matches.Username = USERS.username
-    WHERE Users_to_Matches.MatchID = (SELECT MAX(MatchID) FROM Matches) AND Users_To_Matches.username = '${req.session.user2.Username2}');`
+    updateUserCurr = ` 
+    UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager * 2} 
+    WHERE USERS.username = '${req.session.user2.Username}';`
     //Setting the Victor of the Match
-    setVictor2 = `
-    UPDATE Matches SET victor = '${req.session.user2.Username2}'
+    setVictor = `
+    UPDATE Matches SET victor = '${req.session.user2.Username}'
     WHERE MatchID = (Select MAX(MatchID) 
     FROM Users_To_Matches);`
     //Update wins for player 2 and losses for player 1
-    updateStats2 = `
+    updateStats = `
     UPDATE Users SET TotalWins = TotalWins + 1
-    WHERE Username = '${req.session.user2.Username2}';
+    WHERE Username = '${req.session.user2.Username}';`
 
-    UPDATE Users SET TotalLosses = TotalLosses + 1 
-    WHERE Username = '${req.session.user2.Username2}';
-    `
-   
+    updateStats2 = `UPDATE Users SET TotalLosses = TotalLosses + 1 
+    WHERE Username = '${req.session.user.Username}';`
+
+    
   }
+
+  console.log("username2" + req.session.user2.Username)
+  console.log("username" + req.session.user.Username);
   
+  await db.query(updateUserCurr);
+  await db.query(setVictor);
+  await db.query(updateStats);
+  // await db.query(updateStats2);
+
+  await db.any(updateStats2)
+    .then(function () {
+      res.status(200).send();
+      console.log("test1")
+    })
+    .catch(function (err) {
+      res.status(500).send();
+      console.log(err);
+    });
    
 });
 
