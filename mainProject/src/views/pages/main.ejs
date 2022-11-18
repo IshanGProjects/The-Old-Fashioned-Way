@@ -17,11 +17,11 @@
     </div>
     <!-- Main Page Buttons -->
     <div class="container text-center" style="position: absolute; left: 50%; bottom: 125px; transform: translateX(-50%)">
-            <form action="/profile" method="GET">
+            <form action="/profile" method="POST">
                 <button type="submit" style="margin-left: auto; margin-right: auto; margin-top: 12px;" class="nes-btn is-primary">PLAYER 1: <%= Username %></button>
             </form>
             <% if(locals.Username2) { %>
-                <form action="/profileUser2" method="GET">
+                <form action="/profileUser2" method="POST">
                     <button type="submit" style="margin-left: auto; margin-right: auto; margin-top: 12px;" class="nes-btn is-primary">PLAYER 2: <%= Username2 %></button>
                 </form>
             <% } else { %> 
@@ -30,7 +30,6 @@
                 </form>
             <% } %>
             <% if(locals.Username2 && locals.Username) { %>
-
             <a href="/placeBet">
                 <button type="submit" style="margin-left: auto; margin-right: auto; margin-top: 36px;" class="nes-btn is-success">START GAME</button>
             </a>

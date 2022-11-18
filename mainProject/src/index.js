@@ -22,9 +22,6 @@ app.use(
   })
 );
 //Create a const user that will store our user 1 variables
-const game = {
-  winner: undefined,
-}
 const user = {
   Username: undefined,
   Email: undefined,
@@ -94,8 +91,6 @@ app.get('/login', (req, res) => {
 
 //GET Logout should destory sesion and restart out user values
 app.get('/logout', (req, res) => {
-  req.session.user = false;
-  req.session.user2 = false;
   req.session.destroy();
   res.redirect('/home');
 });
@@ -141,7 +136,7 @@ app.get('/placeBet', auth, (req, res) => {
 //GET Main Page
 app.get('/main', auth, (req, res) => {
   console.log("test3")
-  if(user2.Username == undefined) {
+  if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
     console.log("test4")
     res.render('pages/main',{
       Username: req.session.user.Username,
@@ -558,6 +553,42 @@ app.post('/register', async (req, res) => {
       });
   }
 });
+//Post Profile So It Updates As A user wins or losses or gets or loesses coins
+app.post('/profile', auth, async (req, res) => {
+  const query = `SELECT * FROM Users WHERE Users.Username = '${req.session.user.Username}'`;
+  db.one(query)
+    .then( async (data) => {
+        user.Username = data.username;
+        user.Email = data.email;
+        user.Country = data.country;
+        user.CurrencyBalance = data.currencybalance;
+        user.TotalWins = data.totalwins;
+        user.TotalLosses = data.totallosses;
+        user.ImageURL = data.imageurl;
+        req.session.user = user;
+        req.session.save();
+        res.redirect('/profile');
+    })
+});
+
+//Post Profile So It Updates As A user wins or losses or gets or loesses coins
+app.post('/profileUser2', auth, async (req, res) => {
+  const query = `SELECT * FROM Users WHERE Username = '${req.session.user2.Username}'`;
+  db.one(query)
+    .then( async (data2) => {
+        user2.Username = data2.username;
+        user2.Email = data2.email;
+        user2.Country = data2.country;
+        user2.CurrencyBalance = data2.currencybalance;
+        user2.TotalWins = data2.totalwins;
+        user2.TotalLosses = data2.totallosses;
+        user2.ImageURL = data2.imageurl;
+        req.session.user2 = user2;
+        req.session.save();
+        res.redirect('/profileUser2');
+    })
+});
+
 //POST Login
 app.post("/login", (req, res) => {
   
@@ -576,7 +607,6 @@ app.post("/login", (req, res) => {
       message: "Please type in a password to login.",
     });
   }
-
   else{
     db.one(query)
     .then( async (data) => {
@@ -595,7 +625,8 @@ app.post("/login", (req, res) => {
         user.CurrencyBalance = data.currencybalance;
         user.TotalWins = data.totalwins;
         user.TotalLosses = data.totallosses;
-        user.ImageURL = data.imageurl
+        user.ImageURL = data.imageurl;
+
         req.session.user = user;
         req.session.save();
 
@@ -661,7 +692,7 @@ app.post("/loginUser2", (req, res) => {
         user2.CurrencyBalance = data2.currencybalance;
         user2.TotalWins = data2.totalwins;
         user2.TotalLosses = data2.totallosses;
-        user2.ImageURL = data2.imageurl
+        user2.ImageURL = data2.imageurl;
         req.session.user2 = user2;
         req.session.save();
 
