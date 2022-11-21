@@ -6,22 +6,22 @@ Pong = {
 
   Defaults: {
     //1280X720
-    width:        640,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
-    height:       480,   // logical canvas height (ditto)
-    wallWidth:    12,
-    paddleWidth:  12,
-    paddleHeight: 60,
+    width:        1280,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
+    height:       960,   // logical canvas height (ditto)
+    wallWidth:    24,
+    paddleWidth:  24,
+    paddleHeight: 120,
     paddleSpeed:  2,     // should be able to cross court vertically   in 2 seconds
     ballSpeed:    4,     // should be able to cross court horizontally in 4 seconds, at starting speed ...
     ballAccel:    8,     // ... but accelerate as time passes
-    ballRadius:   5,
+    ballRadius:   10,
     sound:        true
   },
 
   Colors: {
-    walls:           'red',
+    walls:           '#f6c244',
     ball:            'white',
-    score:           'red',
+    score:           '#f6c244',
     footprint:       '#333',
     predictionGuess: 'purple',
     predictionExact: 'green'
