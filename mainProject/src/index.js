@@ -228,7 +228,23 @@ app.get('/profileUser2', auth, (req, res) => {
 
 //Get Request for Game
 app.get('/game', auth, (req,res) =>{
-  res.render('gameData/jsPong/index');
+  res.render('gameData/jsPong/index', {
+    Username: req.session.user.Username,
+    Email: req.session.user.Email,
+    Country: req.session.user.Country,
+    CurrencyBalance: req.session.user.CurrencyBalance,
+    TotalWins: req.session.user.TotalWins,
+    TotalLosses: req.session.user.TotalLosses,
+    ImageURL: req.session.user.ImageURL,
+
+    Username2: req.session.user2.Username,
+    Email2: req.session.user2.Email,
+    Country2: req.session.user2.Country,
+    CurrencyBalance2: req.session.user2.CurrencyBalance,
+    TotalWins2: req.session.user2.TotalWins,
+    TotalLosses2: req.session.user2.TotalLosses,
+    ImageURL2: req.session.user2.ImageURL,
+  });
 });
 
 //Winner EJS PAGE
