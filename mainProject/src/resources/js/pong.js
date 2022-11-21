@@ -18,12 +18,12 @@ Pong = {
   },
 
   Colors: {
-    walls:           'red',
-    ball:            'red',
-    score:           'red',
+    walls:           'white',
+    ball:            'white',
+    score:           'white',
     footprint:       '#333',
-    predictionGuess: 'yellow',
-    predictionExact: 'red'
+    predictionGuess: 'purple',
+    predictionExact: 'green'
   },
 
   Images: [
