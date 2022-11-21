@@ -19,12 +19,12 @@
 
 
 
-  <div class="nes-container with-title is-centered">  
+  <!-- <div class="nes-container with-title is-centered">   -->
     
-    <div class='settings'>
+    <!-- <div class='settings'>
       <label for='sound'>sound: </label>
       <input  type='checkbox' id='sound'>
-    </div>
+    </div> -->
 
     <!--In order to remove these div tags you have to remove it from the statst-->
     <!-- <div class='settings'>
@@ -32,7 +32,7 @@
       <input type='checkbox' id='stats' checked>
     </div> -->
 
-    <div class='settings'>
+    <!-- <div class='settings'>
       <label for='footprints'>footprints: </label>
       <input type='checkbox' id='footprints'>
     </div>
@@ -40,9 +40,9 @@
     <div class='settings'>
       <label for='predictions'>predictions: </label>
       <input type='checkbox' id='predictions'>
-    </div>
+    </div> -->
 
-  </div>
+  <!-- </div> -->
 
   <canvas id="game">
     <div id="unsupported">
@@ -62,10 +62,10 @@
     var predictions = document.getElementById('predictions');
 
     var pong = Game.start('game', Pong, {
-      sound:       sound.checked,
+      // sound:       sound.checked,
       // stats:       stats.checked,
-      footprints:  footprints.checked,
-      predictions: predictions.checked
+      // footprints:  footprints.checked,
+      // predictions: predictions.checked
     });
 
     Game.addEvent(sound,       'change', function() { pong.enableSound(sound.checked);           });
