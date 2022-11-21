@@ -5,6 +5,7 @@
 Pong = {
 
   Defaults: {
+    //1280X720
     width:        640,   // logical canvas width (browser will scale to physical canvas size - which is controlled by @media css queries)
     height:       480,   // logical canvas height (ditto)
     wallWidth:    12,
@@ -18,9 +19,9 @@ Pong = {
   },
 
   Colors: {
-    walls:           'white',
+    walls:           'red',
     ball:            'white',
-    score:           'white',
+    score:           'red',
     footprint:       '#333',
     predictionGuess: 'purple',
     predictionExact: 'green'
