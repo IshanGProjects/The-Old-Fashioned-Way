@@ -43,3 +43,15 @@ canvas{
   left: 50%;
   transform: translate(-50%, -50%);               
 }
+
+.p1Portrait{
+  width: 200px;
+  height: 500px;
+  float: left;
+}
+
+.p2Portrait{
+  width: 200px;
+  height: 500px;
+  float: right;
+}

@@ -167,8 +167,8 @@ Pong = {
 
   onkeydown: function(keyCode) {
     switch(keyCode) {
-      case Game.KEY.ZERO: this.startDemo();            break;
-      case Game.KEY.ONE:  this.startSinglePlayer();    break;
+      // case Game.KEY.ZERO: this.startDemo();            break;
+      // case Game.KEY.ONE:  this.startSinglePlayer();    break;
       case Game.KEY.TWO:  this.startDoublePlayer();    break;
       case Game.KEY.ESC:  this.stop(true);             break;
       case Game.KEY.Q:    if (!this.leftPaddle.auto)  this.leftPaddle.moveUp();    break;
