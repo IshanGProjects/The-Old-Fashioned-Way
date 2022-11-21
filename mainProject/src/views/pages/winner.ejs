@@ -2,7 +2,23 @@
 <%- include ('../partials/message') %>
 
 <main>
-    <h1>It WORKED</h1>
+    <div class="row h-100">
+        <div class="col-5 m-auto">
+                <div class="nes-container is-dark with-title">
+                    <h3 class="title">GAME OVER</h3>
+                    <center>
+                        <h1 style="color: #f6c244;"> <%= username %> <br>
+                            WINS! </h1>
+                    </center>
+                </div>
+                <div>
+                    <a style="float: right; margin-top: 30px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px;" class="nes-btn is-success" href="/main">CONTINUE</a>
+                    <form action="/placeBet" method="GET">
+                        <button style="float: right; margin-top: 30px; margin-left: 10px; margin-right: 10px; margin-bottom: 10px;" class="nes-btn">PLAY AGAIN</button>
+                    </form>
+                </div>
+        </div>
+    </div>
 </main>
 
 <%- include ('../partials/footer') %>

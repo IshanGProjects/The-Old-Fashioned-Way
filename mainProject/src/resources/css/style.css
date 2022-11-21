@@ -29,14 +29,12 @@ html{
  }
 
  .loginContainer{
-   
     display: flex;
     align-items: center;
     justify-content: center;
     position:center;opacity:1;
     -ms-transform: translateY(50%);
     transform: translateY(50%)
-
  }
 
  .regContainer{

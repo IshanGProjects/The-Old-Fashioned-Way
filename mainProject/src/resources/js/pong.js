@@ -115,11 +115,11 @@ Pong = {
       axios.post("/checkWinner", {winner: playerNo})
       .then(function(res){
         console.log('render test')
-        window.location.href = '/main'
+        window.location.href = `/winner?winner=${playerNo}`;
       })
       .catch(function (err) {
         console.log(err);
-        window.location.href = '/main'
+        window.location.href = '/winner'
        
       });
       

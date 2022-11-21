@@ -88,10 +88,9 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('pages/login');
 });
+
 //GET Logout should destory sesion and restart out user values
 app.get('/logout', (req, res) => {
-  req.session.user = false;
-  req.session.user2 = false;
   req.session.destroy();
   res.redirect('/home');
 });
@@ -117,7 +116,34 @@ const auth = (req, res, next) => {
     next();
   };
 //GET Place Bet Page
-app.get('/placeBet', auth, (req, res) => {
+app.get('/placeBet', auth, async(req, res) => {
+  const query_user1 = `SELECT * FROM Users WHERE Users.Username = '${req.session.user.Username}'`;
+  const query_user2 = `SELECT * FROM Users WHERE Users.Username = '${req.session.user2.Username}'`;
+
+  await db.one(query_user1)
+    .then( async (data) => {
+        user.Username = data.username;
+        user.Email = data.email;
+        user.Country = data.country;
+        user.CurrencyBalance = data.currencybalance;
+        user.TotalWins = data.totalwins;
+        user.TotalLosses = data.totallosses;
+        user.ImageURL = data.imageurl;
+        req.session.user = user;
+    });
+
+    await db.one(query_user2)
+    .then( async (data2) => {
+      user2.Username = data2.username;
+      user2.Email = data2.email;
+      user2.Country = data2.country;
+      user2.CurrencyBalance = data2.currencybalance;
+      user2.TotalWins = data2.totalwins;
+      user2.TotalLosses = data2.totallosses;
+      user2.ImageURL = data2.imageurl;
+      req.session.user2 = user2;
+    });
+    
     res.render('pages/placeBet',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -133,11 +159,13 @@ app.get('/placeBet', auth, (req, res) => {
       TotalWins2: req.session.user2.TotalWins,
       TotalLosses2: req.session.user2.TotalLosses,
     });
+
+   
 });
 //GET Main Page
 app.get('/main', auth, (req, res) => {
   console.log("test3")
-  if(user2.Username == undefined) {
+  if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
     console.log("test4")
     res.render('pages/main',{
       Username: req.session.user.Username,
@@ -193,33 +221,7 @@ app.get('/profileUser2', auth, (req, res) => {
     ImageURL: req.session.user2.ImageURL,
   });
 });
-//GET Edit Name Page
-app.get('/edit_name', auth, (req, res) => {
-  res.render('pages/edit_name', {
-    Player1: req.session.user.Username,
-    Username: req.session.user.Username,
-    Email: req.session.user.Email,
-    Country: req.session.user.Country,
-    CurrencyBalance: req.session.user.CurrencyBalance,
-    TotalWins: req.session.user.TotalWins,
-    TotalLosses: req.session.user.TotalLosses,
-    ImageURL: req.session.user.ImageURL,
-    
-  });
-});
-//GET Edit User 2 Page
-app.get('/edit_name2', auth, (req, res) => {
-  res.render('pages/edit_name', {
-    Player1: req.session.user.Username,
-    Username: req.session.user2.Username,
-    Email: req.session.user2.Email,
-    Country: req.session.user2.Country,
-    CurrencyBalance: req.session.user2.CurrencyBalance,
-    TotalWins: req.session.user2.TotalWins,
-    TotalLosses: req.session.user2.TotalLosses,
-    ImageURL: req.session.user2.ImageURL,
-  });
-});
+
 //Get Request for Game
 app.get('/game', auth, (req,res) =>{
   res.render('gameData/jsPong/index');
@@ -227,7 +229,15 @@ app.get('/game', auth, (req,res) =>{
 
 //Winner EJS PAGE
 app.get('/winner', auth, (req,res) =>{
-  res.render('pages/winner');
+  if(req.query.winner == 0){
+    res.render('pages/winner', {
+      username: req.session.user.Username,
+    });
+  } else {
+    res.render('pages/winner', {
+      username: req.session.user2.Username,
+    });
+  }
 });
 
 app.get("/betConfirm", auth, (req,res) =>{
@@ -344,85 +354,13 @@ app.post('/leaderboard', auth, async (req, res) => {
   }
 });
 
-//POST Edit Profile Name For User 2 Page
-app.post('/edit_name', auth, (req, res) => {
-  const newUsername = req.body.username;
-  query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user.Username}'`
-
-    db.any(query)
-      .then(function () {
-        req.session.user.Username = newUsername;
-
-        res.render('pages/profile', {
-          Player1: req.session.user.Username,
-          Username: req.session.user.Username,
-          Email: req.session.user.Email,
-          Country: req.session.user.Country,
-          CurrencyBalance: req.session.user.CurrencyBalance,
-          TotalWins: req.session.user.TotalWins,
-          TotalLosses: req.session.user.TotalLosses,
-          ImageURL: req.session.user.ImageURL,
-        });
-      })
-      .catch(function (err) {
-        res.render('pages/profile',  {
-          error: true,
-          message: "Username already exists in the system, please try another username or login to your account",
-          Player1: req.session.user.Username,
-          Username: req.session.user.Username,
-          Email: req.session.user.Email,
-          Country: req.session.user.Country,
-          CurrencyBalance: req.session.user.CurrencyBalance,
-          TotalWins: req.session.user.TotalWins,
-          TotalLosses: req.session.user.TotalLosses,
-          ImageURL: req.session.user.ImageURL,
-        });
-        console.log(err);
-      });
-});
-//POST Edit Name For User 2 Page
-app.post('/edit_name2', auth, (req, res) => {
-  const newUsername = req.body.username;
-  query = `UPDATE Users SET Username = '${newUsername}' WHERE Username = '${req.session.user2.Username}'`
-
-    db.any(query)
-      .then(function () {
-        req.session.user2.Username = newUsername;
-
-        res.render('pages/profile', {
-          Player1: req.session.user.Username,
-          Username: req.session.user2.Username,
-          Email: req.session.user2.Email,
-          Country: req.session.user2.Country,
-          CurrencyBalance: req.session.user2.CurrencyBalance,
-          TotalWins: req.session.user2.TotalWins,
-          TotalLosses: req.session.user2.TotalLosses,
-          ImageURL: req.session.user2.ImageURL,
-        });
-      })
-      .catch(function (err) {
-        res.render('pages/profile',  {
-          error: true,
-          message: "Username already exists in the system, please try another username or login to your account",
-          Player1: req.session.user.Username,
-          Username: req.session.user2.Username,
-          Email: req.session.user2.Email,
-          Country: req.session.user2.Country,
-          CurrencyBalance: req.session.user2.CurrencyBalance,
-          TotalWins: req.session.user2.TotalWins,
-          TotalLosses: req.session.user2.TotalLosses,
-          ImageURL: req.session.user2.ImageURL,
-        });
-        console.log(err);
-      });
-});
 //POST edit profile image for User 1
 app.post('/editImageProfile1',auth, (req, res) => {
   const newImageURL = req.body.imageURL;
 
   console.log(req.body.imageURL);
 
-  query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user.Username}'`
+  query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user.Username}'`;
 
 
   db.any(query)
@@ -463,7 +401,7 @@ app.post('/editImageProfile2',auth, (req, res) => {
 
   console.log(req.body.imageURL);
 
-  query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user2.Username}'`
+  query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user2.Username}'`;
 
 
   db.any(query)
@@ -546,6 +484,42 @@ app.post('/register', async (req, res) => {
       });
   }
 });
+//Post Profile So It Updates As A user wins or losses or gets or loesses coins
+app.post('/profile', auth, async (req, res) => {
+  const query = `SELECT * FROM Users WHERE Users.Username = '${req.session.user.Username}'`;
+  db.one(query)
+    .then( async (data) => {
+        user.Username = data.username;
+        user.Email = data.email;
+        user.Country = data.country;
+        user.CurrencyBalance = data.currencybalance;
+        user.TotalWins = data.totalwins;
+        user.TotalLosses = data.totallosses;
+        user.ImageURL = data.imageurl;
+        req.session.user = user;
+        req.session.save();
+        res.redirect('/profile');
+    })
+});
+
+//Post Profile So It Updates As A user wins or losses or gets or loesses coins
+app.post('/profileUser2', auth, async (req, res) => {
+  const query = `SELECT * FROM Users WHERE Username = '${req.session.user2.Username}'`;
+  db.one(query)
+    .then( async (data2) => {
+        user2.Username = data2.username;
+        user2.Email = data2.email;
+        user2.Country = data2.country;
+        user2.CurrencyBalance = data2.currencybalance;
+        user2.TotalWins = data2.totalwins;
+        user2.TotalLosses = data2.totallosses;
+        user2.ImageURL = data2.imageurl;
+        req.session.user2 = user2;
+        req.session.save();
+        res.redirect('/profileUser2');
+    })
+});
+
 //POST Login
 app.post("/login", (req, res) => {
   
@@ -564,7 +538,6 @@ app.post("/login", (req, res) => {
       message: "Please type in a password to login.",
     });
   }
-
   else{
     db.one(query)
     .then( async (data) => {
@@ -583,7 +556,8 @@ app.post("/login", (req, res) => {
         user.CurrencyBalance = data.currencybalance;
         user.TotalWins = data.totalwins;
         user.TotalLosses = data.totallosses;
-        user.ImageURL = data.imageurl
+        user.ImageURL = data.imageurl;
+
         req.session.user = user;
         req.session.save();
 
@@ -649,7 +623,7 @@ app.post("/loginUser2", (req, res) => {
         user2.CurrencyBalance = data2.currencybalance;
         user2.TotalWins = data2.totalwins;
         user2.TotalLosses = data2.totallosses;
-        user2.ImageURL = data2.imageurl
+        user2.ImageURL = data2.imageurl;
         req.session.user2 = user2;
         req.session.save();
 
@@ -875,6 +849,7 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 
 // Recieving and testing to see if i have that value for the win
 app.post("/checkWinner",  async(req, res) =>{
+
   const {winner} = req.body;
   console.log(winner);
   // console.log(winner)
@@ -885,7 +860,7 @@ app.post("/checkWinner",  async(req, res) =>{
   // UpdateUser1Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user.Username};'`;
   // UpdateUser2Query = `UPDATE Users SET CurrencyBalance = CurrencyBalance - '${wager}' WHERE Username = '${req.session.user2.Username};'`;
 
-  if(winner == 0){
+  if(winner === 0){
    
     //Setting Current Balance if player1 wins
     updateUserCurr = `
@@ -909,7 +884,7 @@ app.post("/checkWinner",  async(req, res) =>{
 
   }
 
-  else if(winner = 1){
+  else if(winner === 1){
     //Setting Current Balance if player2 wins
     updateUserCurr = ` 
     UPDATE USERS SET CurrencyBalance = CurrencyBalance + ${wager * 2} 
@@ -950,5 +925,10 @@ app.post("/checkWinner",  async(req, res) =>{
 });
 
 //SERVER LISTENING TO CLIENT REQUESTS
+app.get('/*', (req, res) => {
+  res.redirect('/main')
+});
+
+
 app.listen(3000);
 console.log('Server is listening on port 3000')
