@@ -143,6 +143,10 @@ app.get('/placeBet', auth, async(req, res) => {
       user2.ImageURL = data2.imageurl;
       req.session.user2 = user2;
     });
+
+
+    req.session.save();
+
     
     res.render('pages/placeBet',{
       Username: req.session.user.Username,
