@@ -26,17 +26,6 @@
                 <table style="width: 100%;">
                     <tr>
                         <td style="font-size: 22px; width: 30%;">Username: </td> <th style="font-size: 22px;"><%= Username %></th>
-                        <td>
-                            <% if (locals.Username == locals.Player1) { %>
-                                <form action="/edit_name" method="GET">
-                                    <button type="submit" style="float: right;" class="nes-btn is-warning" >EDIT</button>
-                                </form>
-                            <% } else { %>
-                                <form action="/edit_name2" method="GET">
-                                    <button type="submit" style="float: right;" class="nes-btn is-warning">EDIT</button>
-                                </form>
-                            <% } %>
-                        </td>
                     </tr>
                     <tr>
                         <td style="font-size: 22px;">Country:</td> <th style="font-size: 22px;"><%= Country %></th>
