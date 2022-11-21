@@ -144,7 +144,9 @@ app.get('/placeBet', auth, async(req, res) => {
       req.session.user2 = user2;
     });
 
+
     req.session.save();
+
     
     res.render('pages/placeBet',{
       Username: req.session.user.Username,
