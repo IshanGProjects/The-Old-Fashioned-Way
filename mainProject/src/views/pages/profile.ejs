@@ -10,14 +10,14 @@
                 <center>
                     <% if (locals.Username == locals.Player1) { %>
                         <form action="/changeUrl" method="GET">
-                            <button type = "submit" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Click Me To Change Your Profile Image"><img src=<%= ImageURL %>
+                            <button type = "submit" style="margin-bottom: 25px;" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Click Me To Change Your Profile Image"><img src=<%= ImageURL %>
                                 alt="Player1Image" height="200" width="200" /></button>
                         </form>
 
                         
                     <% } else { %>
                         <form action="/changeUrl2" method="GET">
-                            <button class="btn btn-secondary" type = "submit" data-toggle="tooltip" data-placement="top" title="Click Me To Change Your Profile Image"><img src=<%= ImageURL %>
+                            <button class="btn btn-secondary" style="margin-bottom: 25px;" type = "submit" data-toggle="tooltip" data-placement="top" title="Click Me To Change Your Profile Image"><img src=<%= ImageURL %>
                                 alt="Player2Image" height="200" width="200" /></button>
                         </form>
                     <% } %>
