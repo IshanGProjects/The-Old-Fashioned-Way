@@ -6,95 +6,95 @@
   <button type="submit" style="position:absolute; top: 20px; left: 20px; margin-bottom: auto;margin-right: auto;" class="nes-btn is-error">BACK</button>
 </form>
 <!-- Leaderboard Main -->
-<div class="container" style="margin: auto; max-width: 720px; padding-top: 60px;">
-    <div class="row">
-        <div class="item" style="background-color:#212529; padding: 1rem 0;">
-            <% if (FILTER == 1) { %>
-                <form action="/leaderboard" method="POST">
-                    <label>
-                        <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="0">
-                        <span style="color: #eae554">WINS</span>
-                    </label>
-                    <label>
-                        <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="1" checked>
-                        <span style="color: #f6c244">COINS</span>
-                    </label>
-                    <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
-                </form>
-            <% } else { %>
-                <form action="/leaderboard" method="POST">
-                    <label>
-                        <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="0" checked>
-                        <span style="color: #f6c244">WINS</span>
-                    </label>
-                    <label>
-                        <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="1">
-                        <span style="color: #eae554">COINS</span>
-                    </label>
-                    <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
-                </form>
-            <% } %>
+<div class="container h-100" style="margin: auto; padding-top: 60px;">
+    <div class="col-8 mx-auto h-100">
+        <div class="row">
+            <div class="item" style="background-color:#212529; padding: 1rem 0;">
+                <% if (FILTER == 1) { %>
+                    <form action="/leaderboard" method="POST">
+                        <label>
+                            <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="0">
+                            <span style="color: #eae554">WINS</span>
+                        </label>
+                        <label>
+                            <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="1" checked>
+                            <span style="color: #f6c244">COINS</span>
+                        </label>
+                        <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
+                    </form>
+                <% } else { %>
+                    <form action="/leaderboard" method="POST">
+                        <label>
+                            <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="0" checked>
+                            <span style="color: #f6c244">WINS</span>
+                        </label>
+                        <label>
+                            <input onChange="this.form.submit();" type="radio" class="nes-radio is-dark" name="filter" value="1">
+                            <span style="color: #eae554">COINS</span>
+                        </label>
+                        <span style="color: #ffffff; font-size: 10px;">[FILTER]</span>
+                    </form>
+                <% } %>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="nes-container is-dark with-title" style="margin: auto; width: 720px;">
-            <h3 class="title">LEADERBOARD</h3>
-            <div class="container" style="height: 480px; overflow: auto;">
-                <table class="table table-borderless" style="color: #ffffff;">
-                    <% if (FILTER == 1) { %>
-                        <tbody>
-                            <% data.forEach(function(lb){ %>
-                                <% if(lb.username == user1) { %>
-                                    <tr style="color: #f6c244;">
-                                <% } else if (locals.user2 && lb.username == user2) { %>
-                                    <tr style="color: #eae554;">
-                                <% } else { %>
-                                    <tr>
-                                <% } %>
-                                <td style="width: 8%;"><%=lb.row%>.</td>
-                                <td><img width = 30 height = 30 src="<%= lb.imageurl %>"></td>
-                                <td style="width: 78%;">
-                                    <div>
-                                        <%=lb.username%>
-                                    </div>
-                                    <div style="font-size: 10px;">
-                                        <%=lb.country%>
-                                    </div>
-                                </td>
-                                <td><%=lb.currencybalance%></td>
-                            </tr>
-                            <%});%>
-                        </tbody>
-                    <% } else { %>
-                        <tbody>
-                            <% data.forEach(function(lb){ %>
-                                <% if(lb.username == user1) { %>
-                                    <tr style="color: #f6c244;">
-                                <% } else if (locals.user2 && lb.username == user2) { %>
-                                    <tr style="color: #eae554;">
-                                <% } else { %>
-                                    <tr>
-                                <% } %>
-                                <td style="width: 8%;"><%=lb.row%>.</td>
-                                <td><img width = 30 height = 30 src="<%= lb.imageurl %>"></td>
-                                <td style="width: 78%;">
-                                    <div>
-                                        <%=lb.username%>
-                                    </div>
-                                    <div style="font-size: 10px;">
-                                        <%=lb.country%>
-                                    </div>
-                                </td>
-                                <td><%=lb.totalwins%></td>
-                            </tr>
-                            <%});%>
-                        </tbody>
-                    <% } %>
-                </table>
+        <div class="row h-100">
+            <div class="nes-container is-dark with-title" style="width: 100%; max-height: 75%; margin-bottom: 60px;">
+                <h3 class="title">LEADERBOARD</h3>
+                <div class="container" style="height: 100%; overflow: auto;">
+                    <table class="table table-borderless" style="color: #ffffff;">
+                        <% if (FILTER == 1) { %>
+                            <tbody>
+                                <% data.forEach(function(lb){ %>
+                                    <% if(lb.username == user1) { %>
+                                        <tr style="color: #f6c244;">
+                                    <% } else if (locals.user2 && lb.username == user2) { %>
+                                        <tr style="color: #eae554;">
+                                    <% } else { %>
+                                        <tr>
+                                    <% } %>
+                                    <td style="width: 8%;"><%=lb.row%>.</td>
+                                    <td><img width = 30 height = 30 src="<%= lb.imageurl %>"></td>
+                                    <td style="width: 78%;">
+                                        <div>
+                                            <%=lb.username%>
+                                        </div>
+                                        <div style="font-size: 10px;">
+                                            <%=lb.country%>
+                                        </div>
+                                    </td>
+                                    <td><%=lb.currencybalance%></td>
+                                </tr>
+                                <%});%>
+                            </tbody>
+                        <% } else { %>
+                            <tbody>
+                                <% data.forEach(function(lb){ %>
+                                    <% if(lb.username == user1) { %>
+                                        <tr style="color: #f6c244;">
+                                    <% } else if (locals.user2 && lb.username == user2) { %>
+                                        <tr style="color: #eae554;">
+                                    <% } else { %>
+                                        <tr>
+                                    <% } %>
+                                    <td style="width: 8%;"><%=lb.row%>.</td>
+                                    <td><img width = 30 height = 30 src="<%= lb.imageurl %>"></td>
+                                    <td style="width: 78%;">
+                                        <div>
+                                            <%=lb.username%>
+                                        </div>
+                                        <div style="font-size: 10px;">
+                                            <%=lb.country%>
+                                        </div>
+                                    </td>
+                                    <td><%=lb.totalwins%></td>
+                                </tr>
+                                <%});%>
+                            </tbody>
+                        <% } %>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 </main>
-
-<%- include ('../partials/footer') %>
