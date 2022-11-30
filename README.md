@@ -1,9 +1,4 @@
-
- 
-# The-Old-Fashioned-Way 
-
-
-# Welcome to Our Project! :hand:
+# Welcome to Our Project "The-Old-Fashioned-Way" ! :hand:
 Follow These Steps to Deploy Our Project On Your Local Host:
   
   
