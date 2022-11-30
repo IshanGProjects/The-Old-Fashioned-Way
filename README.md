@@ -1,7 +1,7 @@
 
-```diff 
+ 
 # The-Old-Fashioned-Way 
-```
+
 
 # Welcome to Our Project! :hand:
 Follow These Steps to Deploy Our Project On Your Local Host:
