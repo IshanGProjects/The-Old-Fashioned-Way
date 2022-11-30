@@ -6,6 +6,10 @@ Follow These Steps to Deploy Our Project On Your Local Host:
 - Clone the Repository.
 - Create the .env file inside the mainProject folder following the sample env file guide from the repository.
 - Make sure you have docker installed on your computer and ensure that it is running.
+- If you do not have docker you can download it here:
+```
+https://docs.docker.com/get-docker/
+```
 - After that run the command:
 ```
 docker compose up
