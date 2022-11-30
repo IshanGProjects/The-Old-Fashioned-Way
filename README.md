@@ -2,6 +2,13 @@
 
 # Getting Started:
 Follow These Steps to Deploy Our Project On Your Local Host:
+
+- Clone the Repository 
+- Create the .env file following the sample env file from the repository
+- Make sure you have docker installed on your computer and ensure that it is running, after that run the command:
+```
+npm start
+```
   
   
 # 1. Team Number
