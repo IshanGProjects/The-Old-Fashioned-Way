@@ -110,21 +110,21 @@ Pong = {
     this.scores[playerNo] += 1;
     if (this.scores[playerNo] == 3) {
       this.menu.declareWinner(playerNo);
-      console.log(playerNo)
+     
       //I need to write an AJAX API request to send the playerNo from the client side JS to the nodeJS index file
 
       axios.post("/checkWinner", {winner: playerNo})
       .then(function(res){
-        console.log('render test')
+       
         window.location.href = `/winner?winner=${playerNo}`;
       })
       .catch(function (err) {
-        console.log(err);
+       
         window.location.href = '/winner'
        
       });
       
-      console.log("WIN WIN")
+     
       this.stop();
     }
     else {
