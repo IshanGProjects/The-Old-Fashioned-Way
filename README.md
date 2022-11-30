@@ -1,5 +1,24 @@
-# The-Old-Fashioned-Way
-  
+# Welcome to Our Project "The-Old-Fashioned-Way" ! :hand:
+
+# Getting Started:
+Follow These Steps to Deploy Our Project On Your Local Host:
+
+- Clone the Repository.
+- Create the .env file inside the mainProject folder following the sample env file guide from the repository.
+- Make sure you have docker installed on your computer and ensure that it is running.
+- If you do not have docker you can download it here:
+```
+https://docs.docker.com/get-docker/
+```
+- After that run the command:
+```
+docker compose up
+```
+- Then on your browser please type in: 
+```
+http://localhost:3000
+```
+# HAVE FUN! :video_game:
 # 1. Team Number
   Team Number 7
 # 2. Team name
