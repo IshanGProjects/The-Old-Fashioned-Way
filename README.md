@@ -1,4 +1,9 @@
 # The-Old-Fashioned-Way
+
+# Welcome to Our Project! :hand:
+  
+  
+  
   
 # 1. Team Number
   Team Number 7
