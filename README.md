@@ -3,7 +3,9 @@
 # Welcome to Our Project! :hand:
 Follow These Steps to Deploy Our Project On Your Local Host:
   
-  
+  ```diff
+- text in red
+```
   
 # 1. Team Number
   Team Number 7
