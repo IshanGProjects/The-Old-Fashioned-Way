@@ -9,7 +9,10 @@ Follow These Steps to Deploy Our Project On Your Local Host:
 ```
 docker compose up
 ```
-  
+- Then on your browser please type in: 
+```
+http://localhost:3000/
+```
 # 1. Team Number
   Team Number 7
 # 2. Team name
