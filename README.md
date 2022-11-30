@@ -1,6 +1,6 @@
 
 ```diff 
-- The-Old-Fashioned-Way 
+# The-Old-Fashioned-Way 
 ```
 
 # Welcome to Our Project! :hand:
