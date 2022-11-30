@@ -168,9 +168,9 @@ app.get('/placeBet', auth, async(req, res) => {
 });
 //GET Main Page
 app.get('/main', auth, (req, res) => {
-  console.log("test3")
+ 
   if(req.session.user2 == undefined || req.session.user2.Username == undefined) {
-    console.log("test4")
+   
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -180,7 +180,7 @@ app.get('/main', auth, (req, res) => {
       TotalLosses: req.session.user.TotalLosses,
     });
   } else {
-    console.log("test5")
+   
     res.render('pages/main',{
       Username: req.session.user.Username,
       Email: req.session.user.Email,
@@ -298,7 +298,7 @@ app.post('/leaderboard', auth, async (req, res) => {
       const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance, ImageUrl FROM Users ORDER BY CurrencyBalance DESC;';
       db.any(query)
       .then((data) => {
-        console.log(data);
+       
         res.render("pages/leaderboard", {
           FILTER: req.body.filter,
           user1: req.session.user.Username,
@@ -316,7 +316,7 @@ app.post('/leaderboard', auth, async (req, res) => {
       const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins, ImageUrl FROM Users ORDER BY TotalWins DESC;';
       db.any(query)
       .then((data) => {
-        console.log(data);
+       
         res.render("pages/leaderboard", {
           FILTER: req.body.filter,
           user1: req.session.user.Username,
@@ -336,7 +336,7 @@ app.post('/leaderboard', auth, async (req, res) => {
       const query = 'SELECT ROW_NUMBER() OVER(ORDER BY CurrencyBalance DESC) AS Row, Username, Country, CurrencyBalance, ImageUrl FROM Users ORDER BY CurrencyBalance DESC;';
       db.any(query)
       .then((data) => {
-        console.log(data);
+       
         res.render("pages/leaderboard", {
           FILTER: req.body.filter,
           user1: req.session.user.Username,
@@ -355,7 +355,7 @@ app.post('/leaderboard', auth, async (req, res) => {
       const query = 'SELECT ROW_NUMBER() OVER(ORDER BY TotalWins DESC) AS Row, Username, Country, TotalWins, ImageUrl FROM Users ORDER BY TotalWins DESC;';
       db.any(query)
       .then((data) => {
-        console.log(data);
+       
         res.render("pages/leaderboard", {
           FILTER: req.body.filter,
           user1: req.session.user.Username,
@@ -378,7 +378,7 @@ app.post('/leaderboard', auth, async (req, res) => {
 app.post('/editImageProfile1',auth, (req, res) => {
   const newImageURL = req.body.imageURL;
 
-  console.log(req.body.imageURL);
+ 
 
   query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user.Username}'`;
 
@@ -419,7 +419,7 @@ app.post('/editImageProfile1',auth, (req, res) => {
 app.post('/editImageProfile2',auth, (req, res) => {
   const newImageURL = req.body.imageURL;
 
-  console.log(req.body.imageURL);
+ 
 
   query = `UPDATE Users SET ImageUrl = '${newImageURL}' WHERE Username = '${req.session.user2.Username}'`;
 
@@ -462,7 +462,7 @@ app.post('/register', async (req, res) => {
   const username = req.body.username;
   const country = req.body.country;
   const hash = await bcrypt.hash(req.body.password, 10);
-  console.log(req.body);
+ 
 
   if(req.body.email == "") {
     res.render('pages/register', {
@@ -569,7 +569,7 @@ app.post("/login", (req, res) => {
       }
 
       if(match == true){
-        console.log(data);
+       
         user.Username = data.username;
         user.Email = data.email;
         user.Country = data.country;
@@ -636,7 +636,7 @@ app.post("/loginUser2", (req, res) => {
       }
 
       if(match == true){
-        console.log(data2);
+       
         user2.Username = data2.username;
         user2.Email = data2.email;
         user2.Country = data2.country;
@@ -871,7 +871,7 @@ app.post("/confirmPlaceBet", auth, async(req, res) =>{
 app.post("/checkWinner",  async(req, res) =>{
 
   const {winner} = req.body;
-  console.log(winner);
+ 
   // console.log(winner)
   // console.log(req.session.user.Username);
   // console.log(req.session.user2.Username);
@@ -925,8 +925,8 @@ app.post("/checkWinner",  async(req, res) =>{
     
   }
 
-  console.log("username2" + req.session.user2.Username)
-  console.log("username" + req.session.user.Username);
+ 
+ 
   
   await db.query(updateUserCurr);
   await db.query(setVictor);
@@ -936,7 +936,7 @@ app.post("/checkWinner",  async(req, res) =>{
   await db.any(updateStats2)
     .then(function () {
       res.status(200).send();
-      console.log("test1")
+     
     })
     .catch(function (err) {
       res.status(500).send();
