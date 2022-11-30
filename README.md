@@ -11,7 +11,7 @@ docker compose up
 ```
 - Then on your browser please type in: 
 ```
-http://localhost:3000/
+http://localhost:3000
 ```
 # 1. Team Number
   Team Number 7
