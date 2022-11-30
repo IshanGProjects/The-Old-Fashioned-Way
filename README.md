@@ -18,7 +18,7 @@ docker compose up
 ```
 http://localhost:3000
 ```
-HAVE FUN! :video_game:
+# HAVE FUN! :video_game:
 # 1. Team Number
   Team Number 7
 # 2. Team name
