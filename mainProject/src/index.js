@@ -480,12 +480,12 @@ app.post('/register', async (req, res) => {
       message: "Please type in a country to create an account.",
     });
   } else if(req.body.password == "") {
-    res.render('pages/register', {
+    res.render('pages/register', { 
       error: true,
       message: "Please type in a password to create an account.",
     });
   } else {
-    query = `INSERT INTO Users (Email, Username, Country, Password, CurrencyBalance, TotalWins, TotalLosses, ImageUrl) VALUES ('${email}', '${username}', '${country}', '${hash}', 100, 0, 0, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKn1n4QbBse5CRtGYgdHj0fZN0WepAYgr8cQ&usqp=CAU');`;
+    query = `INSERT INTO Users (Email, Username, Country, Password, CurrencyBalance, TotalWins, TotalLosses, ImageUrl) VALUES ('${email}', '${username}', '${country}', '${hash}', 100, 0, 0, 'images/default.png');`;
 
     db.any(query)
       .then(function () {
