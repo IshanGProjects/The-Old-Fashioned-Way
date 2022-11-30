@@ -55,3 +55,26 @@ Meet twice a week for 2 hours, depending on people's workload for the week, and 
 ![USE CASE DIAGRAM](https://user-images.githubusercontent.com/86436938/199650119-06ab4d05-0fc5-4570-a33b-81f42f1fcaa1.png)
 # 12. Wireframe
 ![Wireframe (1)](https://user-images.githubusercontent.com/86436938/199586806-bd0757b8-4c96-4aab-9b06-83378b629f6f.png)
+
+# Technology Stack
+**Project Trackers:** <br>
+- Slack <br>
+- GitHub Project Board <br>
+
+**VCS Repository:** <br>
+- GitHub <br>
+
+**Database:** <br>
+- PostgreSQL <br>
+
+**UI Tools:** <br>
+- Figma <br>
+- HTML <br>
+- EJS <br>
+- CSS <br>
+
+**Application Server:** <br>
+- NodeJS <br>
+
+**Deployment Environment:** <br>
+- LocalHost
