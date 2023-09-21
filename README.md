@@ -61,3 +61,5 @@ The Old Fashioned Way was built in Docker Containers, and uses a PostgreSQL data
 
 # Prerequisites to run:
 - Docker
+
+# Screenshots of Application :video_game:
