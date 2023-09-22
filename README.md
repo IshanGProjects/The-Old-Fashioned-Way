@@ -63,3 +63,14 @@ The Old Fashioned Way was built in Docker Containers, and uses a PostgreSQL data
 - Docker
 
 # Screenshots of Application :video_game:
+<img width="1865" alt="Screenshot 2023-09-21 at 11 26 18 AM" src="https://github.com/IshanGProjects/The-Old-Fashioned-Way/assets/64170090/0f0337ad-58b9-4660-a97d-006a1f7ed933">
+<img width="1868" alt="Screenshot 2023-09-21 at 11 26 38 AM" src="https://github.com/IshanGProjects/The-Old-Fashioned-Way/assets/64170090/aea2f336-fa2d-4abb-a4f4-e7db67415718">
+<img width="1842" alt="Screenshot 2023-09-21 at 11 26 49 AM" src="https://github.com/IshanGProjects/The-Old-Fashioned-Way/assets/64170090/40f0d129-39f9-463c-a40f-e73b5f586dd2">
+<img width="1842" alt="Screenshot 2023-09-21 at 11 26 59 AM" src="https://github.com/IshanGProjects/The-Old-Fashioned-Way/assets/64170090/c4d2d8be-eeb2-4661-805a-42dd5b2ae4db">
+<img width="1858" alt="Screenshot 2023-09-21 at 11 27 15 AM" src="https://github.com/IshanGProjects/The-Old-Fashioned-Way/assets/64170090/073d4956-8f4b-4c75-9468-a7ecc1c5ce66">
+<img width="1840" alt="Screenshot 2023-09-21 at 11 28 02 AM" src="https://github.com/IshanGProjects/The-Old-Fashioned-Way/assets/64170090/b802e62b-47cd-4e68-8900-a8ece5bea463">
+
+
+
+
+
